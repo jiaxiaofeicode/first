@@ -188,6 +188,16 @@
 									localStorage.setItem("inputType", 2);
 									toEdit($(this).val());
 								});
+							}else if(list[i].status == 3) {
+								li = '<li class="mui-table-view-cell" value="' + list[i].id + '">' + list[i].build_name +
+									'<span class="mui-pull-right right-80 color-gray">' + list[i].create_time + '</span>' +
+									'<span class="mui-badge mui-badge-purple">审核中</span>' +
+									'</li>';
+								li = $(li);
+								li.on("tap", function() {
+									localStorage.setItem("inputType", 2);
+									toEdit($(this).val());
+								});
 							}
 							$("#report_list").append(li);
 						}
