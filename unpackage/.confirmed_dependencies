@@ -1,0 +1,350 @@
+{
+  "index.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/update.js",
+      "list.html"
+    ],
+    "refer": [
+      "index-menu.html",
+      "list.html"
+    ]
+  },
+  "examples/tab-webview-subpage-contact.html": {
+    "resources": [
+      "images/60x60.gif"
+    ],
+    "refer": []
+  },
+  "examples/tab-webview-main.html": {
+    "resources": [
+      "examples/tab-webview-subpage-about.html"
+    ],
+    "refer": [
+      "examples/tab-webview-subpage-setting.html",
+      "examples/tab-webview-subpage-chat.html",
+      "examples/tab-webview-subpage-contact.html",
+      "examples/tab-webview-subpage-about.html"
+    ]
+  },
+  "list.html": {
+    "refer": [
+      "examples/template.html",
+      "examples/tab-webview-main.html",
+      "examples/pullrefresh_main.html",
+      "examples/guide.html",
+      "examples/accordion.html"
+    ],
+    "resources": []
+  },
+  "examples/pullrefresh_main.html": {
+    "resources": [
+      "examples/pullrefresh_sub.html"
+    ],
+    "refer": [
+      "examples/pullrefresh_sub.html"
+    ]
+  },
+  "examples/accordion.html": {
+    "resources": [
+      "images/cbd.jpg",
+      "images/muwu.jpg",
+      "images/yuantiao.jpg",
+      "css/app.css",
+      "images/shuijiao.jpg"
+    ],
+    "refer": []
+  },
+  "html/login.html": {
+    "resources": [
+      "img/login_bg.jpg",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "html/index_Report.html",
+      "html/forget_password.html",
+      "css/style_index_theme.css",
+      "html/in_index_list.html",
+      "js/jquery.min.js",
+      "conf/ipconf.js"
+    ],
+    "refer": [
+      "html/index_Report.html",
+      "html/in_index_list.html"
+    ]
+  },
+  "html/index_Report.html": {
+    "resources": [
+      "html/login.html",
+      "css/style_index_theme.css",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "html/basic_information.html",
+      "html/report_search.html",
+      "html/in_index_list.html",
+      "html/authentication_report.html",
+      "html/success.html",
+      "html/sitePic.html",
+      "html/forget_password.html",
+      "html/picmark/test1.html",
+      "html/drawing.html",
+      "html/Personal.html",
+      "html/js/jquery-3.1.1.min.js",
+      "js/mui.js"
+    ],
+    "refer": [
+      "html/login.html",
+      "html/report_search.html",
+      "html/in_index_list.html",
+      "html/basic_information.html",
+      "html/authentication_report.html",
+      "html/success.html",
+      "html/sitePic.html",
+      "html/forget_password.html",
+      "html/picmark/test1.html",
+      "html/drawing.html",
+      "html/Personal.html"
+    ]
+  },
+  "html/forget_password.html": {
+    "resources": [
+      "html/login.html",
+      "html/index_Report.html",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "html/Personal.html"
+    ],
+    "refer": [
+      "html/login.html",
+      "html/index_Report.html",
+      "html/Personal.html"
+    ]
+  },
+  "html/basic_information.html": {
+    "resources": [
+      "css/app.css",
+      "html/index_Report.html",
+      "fonts/mui.ttf",
+      "html/drawing.html",
+      "html/picmark/test1.html",
+      "css/style_index_theme.css",
+      "html/authentication_report.html",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "html/sitePic.html",
+      "html/in_index_list.html",
+      "js/jquery.min.js",
+      "conf/ipconf.js",
+      "html/report_search.html",
+      "conf/command.js",
+      "conf/inputTools.js",
+      "conf/validator.js"
+    ],
+    "refer": [
+      "html/index_Report.html",
+      "html/picmark/test1.html",
+      "html/authentication_report.html",
+      "html/in_index_list.html",
+      "html/sitePic.html",
+      "html/drawing.html",
+      "html/report_search.html"
+    ]
+  },
+  "html/report_search.html": {
+    "resources": [
+      "html/index_Report.html",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "css/style_index_theme.css",
+      "conf/ipconf.js",
+      "js/jquery.min.js",
+      "html/basic_information.html"
+    ],
+    "refer": [
+      "html/index_Report.html",
+      "html/basic_information.html"
+    ]
+  },
+  "html/in_index_list.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "css/style_index_theme.css",
+      "html/basic_information.html",
+      "js/jquery.min.js",
+      "conf/ipconf.js",
+      "img/Text01.png",
+      "img/file02.png",
+      "img/file03.png",
+      "img/text_file01.png",
+      "img/file05.png",
+      "img/file06.png",
+      "img/abiword.png"
+    ],
+    "refer": [
+      "html/basic_information.html",
+      "html/new_report.html"
+    ]
+  },
+  "html/drawing.html": {
+    "resources": [
+      "js/mui.zoom.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/mui.previewimage.js",
+      "css/style_index_theme.css",
+      "html/authentication_report.html",
+      "html/taggd/dist/taggd.js",
+      "html/taggd/dist/taggd.css",
+      "js/jquery.min.js",
+      "html/css/bootstrap.min.css",
+      "html/basic_information.html",
+      "conf/ipconf.js",
+      "html/index_Report.html",
+      "html/sitePic.html",
+      "images/1.jpg",
+      "images/login-1.png",
+      "conf/loadpointpic.js",
+      "conf/mapJs.js",
+      "img/pic001.jpg",
+      "conf/command.js",
+      "html2canvas/dist/html2canvas.js",
+      "js/mui.js"
+    ],
+    "refer": [
+      "html/basic_information.html",
+      "html/authentication_report.html",
+      "html/index_Report.html",
+      "html/sitePic.html"
+    ]
+  },
+  "html/authentication_report.html": {
+    "resources": [
+      "css/app.css",
+      "html/sitePic.html",
+      "css/style_index_theme.css",
+      "html/basic_information.html",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "html/picmark/test1.html",
+      "html/index_Report.html",
+      "html/drawing.html",
+      "js/jquery.min.js",
+      "conf/ipconf.js",
+      "conf/command.js",
+      "conf/complete.js",
+      "conf/inputTools.js",
+      "conf/validator.js",
+      "conf/acn_report.js"
+    ],
+    "refer": [
+      "html/sitePic.html",
+      "html/basic_information.html",
+      "html/picmark/test1.html",
+      "html/index_Report.html",
+      "html/drawing.html"
+    ]
+  },
+  "html/picmark/test1.html": {
+    "resources": [
+      "js/mui.min.js",
+      "/css/style_index_theme.css",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "html/picmark/css/bootstrap.min.css",
+      "html/picmark/js/jquery-3.1.1.min.js",
+      "html/picmark/1.jpg",
+      "html/picmark/taggd/dist/taggd.css",
+      "html/picmark/taggd/dist/taggd.js",
+      "html/basic_information.html",
+      "html/authentication_report.html",
+      "html/sitePic.html",
+      "html/index_Report.html",
+      "css/style_index_theme.css"
+    ],
+    "refer": [
+      "html/authentication_report.html",
+      "html/basic_information.html",
+      "html/sitePic.html",
+      "html/index_Report.html"
+    ]
+  },
+  "html/sitePic.html": {
+    "resources": [
+      "js/mui.zoom.js",
+      "img/pic001.jpg",
+      "html/picmark/test1.html",
+      "js/mui.previewimage.js",
+      "html/authentication_report.html",
+      "css/style_index_theme.css",
+      "html/success.html",
+      "html/index_Report.html",
+      "html/basic_information.html",
+      "js/jquery.min.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "html/drawing.html",
+      "conf/ipconf.js",
+      "conf/command.js",
+      "html/sitePic.html"
+    ],
+    "refer": [
+      "html/picmark/test1.html",
+      "html/authentication_report.html",
+      "html/success.html",
+      "html/basic_information.html",
+      "html/index_Report.html",
+      "html/drawing.html",
+      "html/sitePic.html"
+    ]
+  },
+  "html/success.html": {
+    "resources": [
+      "img/sign-check-icon.png",
+      "html/index_Report.html",
+      "html/sitePic.html",
+      "js/mui.min.js",
+      "css/app.css",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "css/style_index_theme.css"
+    ],
+    "refer": [
+      "html/index_Report.html",
+      "html/sitePic.html"
+    ]
+  },
+  "html/new_report.html": {
+    "resources": [
+      "html/in_index_list.html"
+    ],
+    "refer": [
+      "html/report_search.html",
+      "html/in_index_list.html"
+    ]
+  },
+  "html/Personal.html": {
+    "resources": [
+      "html/forget_password.html",
+      "html/login.html",
+      "img/personal_bg.jpg",
+      "html/basic_information.html",
+      "html/index_Report.html"
+    ],
+    "refer": [
+      "html/forget_password.html",
+      "html/login.html",
+      "html/index_Report.html",
+      "html/basic_information.html"
+    ]
+  }
+}

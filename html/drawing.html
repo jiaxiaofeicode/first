@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="taggd/dist/taggd.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../conf/command.js"></script>
+<link rel="stylesheet" href="taggd/dist/taggd.css"/>
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style_index_theme.css" rel="stylesheet" />
+		<style>
+			.mui-table-view-cell.mui-collapse .mui-table-view .mui-table-view-cell{padding-left: 20px; background-position: 31px 100%;}
+			.description{width: 20%;height: 100%;display: block;background-color: #fbfbfb;margin-left: 101px;}
+			.srawing_area{width: 100%;display: block;position: absolute;padding-left: 200px;}
+			.pic-squre {
+			    width: 100px;
+			    height: 100px;
+			    border-radius: 50px;
+			    border: 1px dashed #bfbfbf;
+			    text-align: center;
+			    font-size: 4em;
+			    line-height: 100px;
+			    color: #bfbfbf;
+			    overflow: hidden;
+			    display: block;
+			    position: absolute;
+			    top: 50%;
+			    margin-top: -80px;
+			}
+			/*.taggd__popup{						
+			    width: 400px;
+			    overflow: scroll;
+			}*/
+				.taggd__button{						
+			   color: red;
+			}
+			.taggd__wrapper {
+			    display: block;
+			    height: 2em;
+			    width: 5em;
+			    position: absolute;
+			    transform-origin: left;
+			}
+		</style>
+		
+		
+		<style type="text/css">
+			.mui-preview-image.mui-fullscreen {
+				position: fixed;
+				z-index: 20;
+				background-color: #000;
+			}
+			.mui-preview-header,
+			.mui-preview-footer {
+				position: absolute;
+				width: 100%;
+				left: 0;
+				z-index: 10;
+			}
+			.mui-preview-header {
+				height: 44px;
+				top: 0;
+			}
+			.mui-preview-footer {
+				height: 50px;
+				bottom: 0px;
+			}
+			.mui-preview-header .mui-preview-indicator {
+				display: block;
+				line-height: 25px;
+				color: #fff;
+				text-align: center;
+				margin: 15px auto 4;
+				width: 70px;
+				background-color: rgba(0, 0, 0, 0.4);
+				border-radius: 12px;
+				font-size: 16px;
+			}
+			.mui-preview-image {
+				display: none;
+				-webkit-animation-duration: 0.5s;
+				animation-duration: 0.5s;
+				-webkit-animation-fill-mode: both;
+				animation-fill-mode: both;
+			}
+			.mui-preview-image.mui-preview-in {
+				-webkit-animation-name: fadeIn;
+				animation-name: fadeIn;
+			}
+			.mui-preview-image.mui-preview-out {
+				background: none;
+				-webkit-animation-name: fadeOut;
+				animation-name: fadeOut;
+			}
+			.mui-preview-image.mui-preview-out .mui-preview-header,
+			.mui-preview-image.mui-preview-out .mui-preview-footer {
+				display: none;
+			}
+			.mui-zoom-scroller {
+				position: absolute;
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-box-align: center;
+				-webkit-align-items: center;
+				align-items: center;
+				-webkit-box-pack: center;
+				-webkit-justify-content: center;
+				justify-content: center;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				-webkit-backface-visibility: hidden;
+			}
+			.mui-zoom {
+				-webkit-transform-style: preserve-3d;
+				transform-style: preserve-3d;
+			}
+			.mui-slider .mui-slider-group .mui-slider-item img {
+				width: auto;
+				height: auto;
+				max-width: 100%;
+				max-height: 100%;
+			}
+			.mui-android-4-1 .mui-slider .mui-slider-group .mui-slider-item img {
+				width: 100%;
+			}
+			.mui-android-4-1 .mui-slider.mui-preview-image .mui-slider-group .mui-slider-item {
+				display: inline-table;
+			}
+			.mui-android-4-1 .mui-slider.mui-preview-image .mui-zoom-scroller img {
+				display: table-cell;
+				vertical-align: middle;
+			}
+			.mui-preview-loading {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				display: none;
+			}
+			.mui-preview-loading.mui-active {
+				display: block;
+			}
+			.mui-preview-loading .mui-spinner-white {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-left: -25px;
+				margin-top: -25px;
+				height: 50px;
+				width: 50px;
+			}
+			.mui-preview-image img.mui-transitioning {
+				-webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
+				transition: transform 0.5s ease, opacity 0.5s ease;
+			}
+			@-webkit-keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			@keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			@-webkit-keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			@keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			p img {
+				max-width: 100%;
+				height: auto;
+			}
+			.mui-segmented-control .mui-control-item-false {
+	line-height: 38px;
+	display: table-cell;
+	overflow: hidden;
+	width: 1%;
+	-webkit-transition: background-color .1s linear;
+	transition: background-color .1s linear;
+	text-align: center;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color: #007aff;
+	border-color: #007aff;
+	border-left: 1px solid #007aff
+}
+.mui-segmented-control .mui-control-item-false.mui-active {
+	color: #fff;
+	background-color: #007aff
+}
+.mui-segmented-control .mui-control-item-false{color: #FFF;border-left: 1px solid #fff;}
+.mui-segmented-control .mui-control-item-false.mui-active {
+    color: #313dbd;
+    background-color: #fff;
+}
+.loading{
+	    margin-top: 55px;
+    z-index: 999;
+    width: 1024px;
+    height: 710px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    background-color: gray;
+    opacity: 0.2;
+}
+
+#clipArea {
+	margin: 10px;
+	height: 600px;
+}
+#clipBtn {
+	margin: 0px;
+
+}
+#view {
+	margin: 0 auto;
+	width: 200px;
+	height: 200px;
+}
+#cut_box{
+	margin: 10px;
+	height: 600px;
+}
+#picPreDiv{
+    vertical-align: middle;
+    display: none;
+    position: relative;
+    height: 688px;
+    width: 1024px;
+    background-color: black;
+    top: 80px;
+}
+		</style>
+		
+		
+	<!--	<script>
+			$('.owl-carousel').owlCarousel({
+		      loop:true,
+		      margin:10,
+		      nav:true,
+		      responsive:{
+		          0:{
+		              items:1
+		          },
+		          600:{
+		              items:3
+		          },
+		          1000:{
+		              items:5
+		          }
+		      }
+		    })
+		</script>-->
+		
+</head>
+
+<body onload="" style="margin :0;padding:0">
+		<header class="mui-bar mui-bar-nav padding-bottom-10 mui-clearfix mui-block bg-darkBlue ">
+			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>-->
+
+<a class="mui-icon mui-icon-closeempty mui-pull-left color-white" href="index_Report.html"></a>
+<!--<a  id="addProPic" class="mui-icon mui-icon-plus mui-pull-right" style="color: #999;"></a>-->
+	<label class="mui-icon mui-icon-plus mui-pull-right" style="color: #fff;">
+		<input type="file" id="file" style="display: none;">
+	</label>
+<a  id="deleteProPic" class="mui-icon mui-icon-close mui-pull-right" style="color: #fff;margin: 0 10px;"></a>
+<a  id="rotate" class="mui-icon mui-icon-refresh mui-pull-right" style="color: #fff;display: none;"></a>
+			<div class="width-40p center-block mui-clearfix">
+				<div id="segmentedControl" class="mui-segmented-control">
+					<a id="basic" class="mui-control-item" href="#item1">房屋概况</a>
+					<a id="drawing" class="mui-control-item mui-active" href="#item2">平面图</a>
+					<a id="info" class="mui-control-item" href="#item3">查勘信息</a>
+					<a id="report" class="mui-control-item" href="#item3">鉴定结论</a>
+					<a id="sitePic" class="mui-control-item" href="#item3">现场图</a>
+					<!--<a id="basic" class="mui-control-item-false" href="#item1">建筑概况</a>
+					<a id="drawing" class="mui-control-item-false mui-active" href="#item2">平面图</a>
+					<a id="report" class="mui-control-item-false" href="#item3">鉴定结论</a>
+					<a id="sitePic" class="mui-control-item-false" href="#item3">现场图</a>-->
+				</div>
+				
+			    
+			</div>
+			<!--<label style="    position: absolute;top: 30px;right: 5%;width: 30px;height: 30px;">-->
+				　　　　<!--<input style="opacity: 0;" type="file" accept="image/*" name="head_img_change" id="head_img_change"/>-->
+				
+				<!--
+						<div id="addProPic" class="pic-squre mui-icon mui-icon-plusempty">-->
+							<!--<div class="pic-squre mui-icon mui-icon-plusempty pull-right" style="width:40px;height: 40px;">
+						</div>-->
+				　		<!--</label>-->
+		</header>
+<!--<div class="mui-content loading" style="margin-top: 55px;z-index:999 ;width: 1024px;height: 710px;" >
+	<img src="../img/loading01.gif"/>
+</div>-->
+<div class="mui-content" style="margin-top: 10px;   " id="main_div">
+			<div class="mui-pull-left mui-scroll-wrapper" style="width: 100px;top:105px;bottom:110px;position: absolute;margin-top: -30px;">
+				<div>
+				<ul class="mui-table-view mui-table-view-chevron">
+					
+					<li class="mui-table-view-cell mui-collapse"><a class="mui-navigate-right" href="#">D</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell typeName" class="D1"><a class="mui-navigate-right" href="#">D1</a>
+							</li>
+						
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">D2</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">D3</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">D4</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">D5</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">D6</a>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse"><a class="mui-navigate-right" href="#">J</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">J1</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">J2</a>
+							</li>
+						
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse"><a class="mui-navigate-right" href="#">Q</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">Q1</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">Q2</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">Q3</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">Q4</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">Q5</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">Q6</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">Q7</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">Q8</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">Q9</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">Q10</a>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse"><a class="mui-navigate-right" href="#">H</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">H1</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">H2</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">H3</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">H4</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">H5</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">H6</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">H7</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">H8</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">H9</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">H10</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">H11</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">H12</a>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse"><a class="mui-navigate-right" href="#">M</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">M1</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">M2</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">M3</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">M4</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">M5</a>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse"><a class="mui-navigate-right" style="font-size: smaller;    padding-right: 30px;" href="#">箭头</a>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">↑</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">↓</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">←</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">→</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">↖</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">↘</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">↗</a>
+							</li>
+							<li class="mui-table-view-cell typeName"><a class="mui-navigate-right" href="#">↙</a>
+							</li>
+						</ul>
+					</li>
+					<li class="mui-table-view-cell mui-collapse typeName"><a class="mui-navigate-right" style="font-size: smaller;    padding-right: 30px;" href="#">其他</a>
+							</li>
+							
+							
+				</ul>
+				</div>
+			</div>
+			<div class="" style="z-index: 10;margin-left: 101px;height: 100%;">
+				<div class="description mui-pull-left mui-scroll-wrapper" id="D1">
+					<div id="dangerDescriptive" class=" mui-scroll" style="text-align: justify;line-height: 30px;padding: 1px;color: #888;padding: 10px;padding-top: 85px;padding-bottom: 120px;">
+				<span>D1:</span>
+				因地基变形引起砌体结构房屋承重墙体产生单条宽度大于10mm的沉降裂缝，或产生最大裂缝宽度大于5mm的多条平行沉降裂缝，且房屋整体倾斜率大于1%。
+					</div>						
+					</div>
+
+			</div>
+
+			
+			<div class="srawing_area mui-pull-right mui-scroll-wrapper" style="z-index: 1;overflow: hidden;">				
+				<!--<div style="position: absolute;top: 10px;right: 10px;"><span><a href="" style="display: block;float: right;">下一步</a></span>　<span class="mui-pull-right">　| 　</span>　<span><a href="" style="display: block;float: right;">导入</a></span> </div>-->
+
+			<div id="mydiv" class="mui-scroll" style="height: inherit;left: 105px;position: relative;    top: 75px;max-height: 580px;width: 619px;">
+			    <img src='' alt='' id='example' style='display:block;max-height: 585px;width: 619px;'>
+			</div>
+			<br>
+			</div>
+			
+			<div class="Thumbnails">
+				<div class="owl-carousel mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="Thumbnails_item mui-icon mui-icon-plus" id="addSpotPic" style="text-align: center;line-height: 80px;"></div>
+						<div id="spotPicDiv">							
+														
+						<!--<div class="Thumbnails_item Thumbnails_bg1">
+								<img src="../images/1.jpg" class="Thumbnails_item spot_pic" data-preview-src="" data-preview-group="1"/>
+							</div>-->
+							<!--<div class="Thumbnails_item Thumbnails_bg1"></div>-->
+						</div>			        
+					</div>
+				      
+				</div>
+			</div>
+			
+			<form id="bottom-form" style="z-index: 20;position: fixed;bottom: 0;width: 100%;background-color: rgba(187,187,187,0.7);">
+				   <button type="button" id="next" class="pull-right btn-darkBlue" style="width: 9%;padding: 5px;margin-top: 26px;margin-right: 1%;">下一步</button>
+			
+			    <div class="pull-right"  style="width: 20%;padding: 5px">注释:<input type="text" id="description"/></div>
+			    <div class="pull-right"  style="display:none;width: 6%;padding: 5px">截图:<input type="button" id="shot"/></div>
+				<div style="width: 26%;padding: 5px;" class="pull-right">
+					<span class="pull-left" style="width:auto;">功能:</span>
+					<select id="select" class="pull-left" style=";">
+					    <option value="point">画点</option>
+					    <option value="remove">删除</option>
+					    <option value="move">移动</option>
+					    <option value="edit">编辑注释</option>
+						</select>
+				</div>
+				<div style="width: 16%;padding: 5px;" class="pull-right">
+						<span class="pull-left" style="width:auto;">图片:</span>
+						<select onchange="changPic();" id="picSelect" class="pull-left" style=";">					    
+							</select>
+				</div>
+				<div class="pull-right"  style="width: 22%;padding: 5px">房型图注释:<input type="text" id="picRemark"/></div>
+			    <div style="display: none;" class="pull-right" style="width: 26%;padding: 5px">导入json:<input type="text" id="jsonStr"/></div>
+			    <button type="button" id="output" class="pull-right" style="width: 10%;padding: 5px;display: none;margin-top: 27px;">导出</button>
+			 </form>
+		</div>
+
+	
+<div id="proPicCrop" style="margin-top: 90px; display: none;">
+<div id="clipArea"></div>
+<button id="clipBtn" class="pull-right btn-darkBlue" >截取</button>
+<button id="originPic" class="pull-right btn-darkBlue" >原图</button>
+<button id="cancelClipBtn" class="pull-right btn-darkBlue" >取消</button>
+<!--<div id="view"></div>-->
+
+</div>
+<div id="picPreDiv" >
+<!--
+	作者：2271758502@qq.com
+	时间：2017-03-20
+	描述：图片预览区域
+-->
+<img id="picPre"  src='' style="max-height: 688px;max-width: 1024px;clear: both; margin:auto; display: block; "/>
+</div>
+</body>
+
+<script src="../js/mui.js"></script>
+<script src="../js/mui.zoom.js"></script>
+<script src="../js/mui.previewimage.js"></script>
+<script src="../conf/ipconf.js"></script>
+<script src="../conf/mapJs.js"></script>
+<script src="../html2canvas/dist/html2canvas.js"></script>
+<script src="js/iscroll-zoom.js"></script>
+<script src="js/hammer.js"></script>
+<script src="js/lrz.all.bundle.js"></script>
+<script src="js/jquery.photoClip.js"></script>
+<script src="../conf/loadpointpic.js"></script>
+<script src="../conf/localDataUpdate.js"></script>
+</html>

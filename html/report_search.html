@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style_index_theme.css" rel="stylesheet" />
+		<script src="../js/mui.min.js"></script>
+		<script>
+			mui.plusReady(function() {
+				var a = plus.webview.getWebviewById('in_index');
+
+				if(a) {
+					a.close();
+				}
+
+			});
+		</script>
+	</head>
+
+	<body>
+
+		<!-- 侧滑导航根容器 -->
+		<div class="mui-off-canvas-wrap mui-draggable mui-scalable">
+			<!-- 菜单容器 -->
+			<aside class="mui-off-canvas-left">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll padding-10 top-55">
+						<!-- 菜单具体展示内容 -->
+						<ul class="mui-table-view mui-table-view-chevron top-20">
+							<li class="mui-table-view-cell">
+								<a href="forget_password.html" class="mui-navigate-right">修改密码</a>
+							</li>
+						</ul>
+						<ul class="mui-table-view top-15">
+							<li class="mui-table-view-cell" style="text-align: center;">
+								<a id="exit">退出</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</aside>
+			<!-- 主页面容器 -->
+			<div class="mui-inner-wrap">
+				<!-- 主页面标题 -->
+				<header class="mui-bar mui-bar-nav padding-bottom-10 mui-clearfix mui-block bg-darkBlue">
+
+					<a class="mui-icon mui-icon-contact mui-pull-left color-white" id="pica"></a>
+
+					<div class="width-40p center-block mui-clearfix">
+						<div id="segmentedControl" class="mui-segmented-control">
+							<a id="index_a" class="mui-control-item" href="index_Report.html">首页</a>
+							<a class="mui-control-item mui-active" href="report_search.html">报告</a>
+							<a class="mui-control-item" href="#item3">统计</a>
+						</div>
+					</div>
+				</header>
+				<div class="mui-content mui-scroll-wrapper">
+					<div class="mui-scroll" style="height: 100%;">
+						<!-- 主界面具体展示内容 -->
+						<div class="content top-15">
+							<!--<div class="mui-input-row mui-search mui-input-search">
+								<input type="search" class="mui-input-clear" placeholder="">
+							</div>-->
+
+							<div class="mui-card mui-col-xs-12 mui-col-sm-12 left-block-greyBg mui-scroll" style="margin-bottom: 35px;overflow-y: auto;">
+
+								<ul class="mui-table-view" style="background-color: rgba(255,255,255,0);margin-bottom: 70px;" id="report_list">
+									<!--	<li class="mui-table-view-cell">房屋鉴定报告1房屋鉴定报告1房屋鉴定报告1
+										<span class="mui-pull-right right-80 color-gray">2017.02.18</span>
+										<span class="mui-badge mui-badge-primary">编辑中</span>
+									</li>
+									<li class="mui-table-view-cell">房屋鉴定报告1房屋鉴定报告1房屋鉴定报告1
+										<span class="mui-pull-right right-80 color-gray">2017.02.18</span>
+										<span class="mui-badge mui-badge-warning">校对中</span>
+									</li>
+									<li class="mui-table-view-cell">房屋鉴定报告1房屋鉴定报告1房屋鉴定报告1
+										<span class="mui-pull-right right-80 color-gray">2017.02.18</span>
+										<span class="mui-badge mui-badge-purple">审核中</span>
+									</li>-->
+
+								</ul>
+
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!---->
+
+		<!---->
+
+		<script src="../conf/ipconf.js"></script>
+		<script src="../js/mui.enterfocus.js"></script>
+		<script src="../js/app.js"></script>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+
+		<script type="text/javascript">
+			var pica = document.getElementById('pica');
+			pica.addEventListener("tap", function() {
+				window.location.href = "Personal.html";
+			});
+
+			var i_a = document.getElementById('index_a');
+			i_a.addEventListener("tap", function() {
+				window.location.href = "index_Report.html";
+				plus.webview.hide('in_index_list.html');
+			});
+
+			mui('#scroll').scroll();
+
+			mui('.mui-scroll-wrapper').scroll({
+				deceleration: 0.000005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+			});
+		</script>
+		<script>
+			mui.plusReady(function() {
+				list();
+			});
+
+			/*function list() {
+
+				var url = ip + "/item.do?command=getAll";
+				var args = {};
+				args["time"] = new Date();
+				args["userId"]=localStorage.getItem("userId");
+				plus.nativeUI.showWaiting( "请等待..." );
+				mui.post(url, args, function(data) {
+					var list = data.success;
+					var li='';
+					for(i in list) {
+						if(list[i].status == 1) {
+							li='<li class="mui-table-view-cell" value="' + list[i].id + '">' + list[i].build_name + '<span class="mui-pull-right right-80 color-gray">' + list[i].create_time + '</span><span class="mui-badge mui-badge-primary">编辑中</span></li>';
+							li = $(li);
+							li.on("tap", function() {
+								toEdit($(this).val());
+							});
+						}else if(list[i].status ==2){
+							li='<li class="mui-table-view-cell" value="' + list[i].id + '">' + list[i].build_name
+										+'<span class="mui-pull-right right-80 color-gray">' + list[i].create_time + '</span>'
+										+'<span class="mui-badge mui-badge-warning">校对中</span>'
+										+'</li>';
+							li = $(li);
+							li.on("tap", function() {
+								localStorage.setItem("inputType",2);
+								toEdit($(this).val());
+							});	
+						}
+						$("#report_list").append(li);
+					}
+					plus.nativeUI.closeWaiting();
+				}, 'json');
+			}*/
+			function list() {
+				var url = ip + "/item.do?command=getAll";
+				var args = {};
+				args["time"] = new Date();
+				args["userId"] = localStorage.getItem("userId");
+				plus.nativeUI.showWaiting("加载中...");
+				mui.ajax(url, {
+					data: args,
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						var list = data.success;
+						var li = '';
+						for(i in list) {
+							if(list[i].status == 1) {
+								li = '<li class="mui-table-view-cell" value="' + list[i].id + '">' + list[i].build_name + '<span class="mui-pull-right right-80 color-gray">' + list[i].create_time + '</span><span class="mui-badge mui-badge-primary">编辑中</span></li>';
+								li = $(li);
+								li.on("tap", function() {
+									toEdit($(this).val());
+								});
+							} else if(list[i].status == 2) {
+								li = '<li class="mui-table-view-cell" value="' + list[i].id + '">' + list[i].build_name +
+									'<span class="mui-pull-right right-80 color-gray">' + list[i].create_time + '</span>' +
+									'<span class="mui-badge mui-badge-warning">校对中</span>' +
+									'</li>';
+								li = $(li);
+								li.on("tap", function() {
+									localStorage.setItem("inputType", 2);
+									toEdit($(this).val());
+								});
+							}
+							$("#report_list").append(li);
+						}
+						plus.nativeUI.closeWaiting();
+					},
+					error: function(xhr, type, errorThrown) {
+						plus.nativeUI.closeWaiting();
+						mui.alert("网络异常,请稍后重试");
+					}
+				});
+			}
+
+			function toEdit(id) {
+				localStorage.removeItem("editId");
+				localStorage.removeItem("itemId");
+				localStorage.setItem("editId", id);
+				window.location.href = "basic_information.html";
+				/*var fuyemian=plus.webview.getWebviewById(plus.runtime.appid);
+				fuyemian.evalJS("Edit()");*/
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,111 @@
+body{
+	font-family: "微软雅黑";
+	
+	}
+body,.mui-card,.mui-btn, button, input[type=button], input[type=reset], input[type=submit],.mui-segmented-control,input, select, textarea{
+	font-size: 20px;
+	color: #444;
+}
+.mui-input-group .mui-input-row,input[type=color], input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week], select, textarea{
+	height: 60px;
+}
+.mui-input-row label,.mui-table-view-cell{padding: 18px 15px;}
+.width-40p{
+	width: 40%;
+}
+.mui-btn, button, input[type=button], input[type=reset], input[type=submit]{
+				padding: 18px;
+			}
+.center-block{display: block;margin-left: auto;margin-right: auto;}
+.padding-10{padding: 20px 0}
+.padding-1{padding: 1px;}
+.padding-bottom-10{padding-bottom: 10px;}
+.padding-bottom-14{padding-bottom: 14px;}
+/*复写了mui.min.css>.mui.bar*/
+.mui-bar{height: auto;}  
+.mui-input-group:after{background-color: rgba(255,255,255,0);}
+
+
+.color-white{color: #fff;}
+.padding-top-bottom-0{padding-bottom: 0;padding-top: 0;}
+/*.padding-top-10{margin-top: 5px;}*/
+.top-15{margin-top: 15px;}
+.top-55{margin-top: 55px;}
+.top-35{margin-top: 35px;}
+.left-20{margin-left: 20px;}
+
+.left-block-greyBg{display: block;background-color: #efeff4;height: 100%;position: fixed;margin: 0;}
+
+.width-100p{width: 100%;}
+.width-50p{width: 50%;}
+.top-20{margin-top: 20px;}
+.center-middle-index-btn{display: block;position: relative;top: 50%;margin-top: -190px;padding:30px;}
+.btn-index{padding: 20px;}
+.center-middle-index-btn a.mui-btn{font-size: 20px;}
+
+
+.list-index{padding: 10px;display: block;margin-right: 70px;color: #666;}
+.bg-darkBlue,.btn-darkBlue{background-color: #313dbd;}
+.btn-darkBlue{color:#fff}
+.btn-darkBlue-outlined{border:1px solid #313dbd;background-color: rgba(255,255,255,0);color: #313dbd;}
+
+.mui-segmented-control .mui-control-item.mui-active {
+    color: #313dbd;
+    background-color: #fff;
+}
+.mui-segmented-control{
+	border: 1px solid #fff;
+}
+.mui-segmented-control .mui-control-item{color: #FFF;border-left: 1px solid #fff;}
+
+
+/*sitePic*/
+.img-squre{width:100%;height: 180px;border: 1px dashed #bfbfbf;text-align: center;font-size: 4em;line-height: 175px;color: #bfbfbf;overflow: hidden;}
+.btn-bottom{display: block;position: fixed;bottom: 0;background-color: rgba(255,255,255,0.8);width: 100%;padding: 10px;}
+
+/*report-search*/
+.right-80{margin-right: 80px;}
+.color-gray{color:#999}
+.bottom-60{margin-bottom: 100px;}
+.bottom-15{margin-bottom: 15px;}
+.left-15{margin-left: 15px;}
+.left-50{padding-left: 50px;}
+.top--4{position: absolute;top: -4px;}
+
+/*basic_information*/
+.other{width: 40% !important;height: 20px;}
+
+/*Personal*/
+.Personal{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	z-index: 999;
+	background-color: #fff;
+}
+/*输入框聚焦*/
+.mui-input-row label~input:focus, .mui-input-row label~select:focus, .mui-input-row label~textarea:focus,input[type=text]:focus{
+	background-color: #efeff4;
+	padding-left: 10px;
+}
+
+/*drawing*/
+.Thumbnails{
+	width: 100px;
+	position: absolute;	
+	display: block;
+	background-color: #ddd;
+	right: 0;
+	bottom: 105px;
+	top: 75px;
+}
+.Thumbnails_item{
+	display: block;
+	width: 100%;
+	height: 80px;
+	background-color: #fff;
+}
+.Thumbnails_bg1{
+	background: url(../img/pic001.jpg) top center no-repeat;
+	background-size: cover;
+}

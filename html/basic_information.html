@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link href="../css/style_index_theme.css" rel="stylesheet" />
+		<!--App自定义的css-->
+		<link rel="stylesheet" type="text/css" href="../css/app.css" />
+		<style>
+			.mui-input-group {
+				background-color: rgba(255, 255, 255, 0);
+			}
+			
+			.bg-white {
+				background-color: #fff;
+				margin: 10px;
+				box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+				border-radius: 2px;
+			}
+			
+			.mui-input-group {
+				padding-top: 5px;
+			}
+			
+			.mui-checkbox input[type=checkbox],
+			.mui-radio input[type=radio] {
+				top: -4px;
+			}
+		</style>
+
+		<script src="../js/mui.min.js"></script>
+
+		<script>
+			mui.plusReady(function() {
+				var a = plus.webview.getWebviewById('in_index');
+
+				if(a) {
+					a.close();
+				}
+			});
+		</script>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav padding-bottom-10 mui-clearfix mui-block bg-darkBlue ">
+
+			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white" href="index_Report.html"></a>-->
+			<a class="mui-icon mui-icon-closeempty mui-pull-left color-white" href="index_Report.html"></a>
+			<div class="width-40p center-block mui-clearfix">
+				<div id="segmentedControl" class="mui-segmented-control">
+					<a id="basic" class="mui-control-item mui-active" href="#item1">房屋概况</a>
+					<a id="drawing" class="mui-control-item" href="#">平面图</a>
+					<a id="info" class="mui-control-item" href="#item3">查勘信息</a>
+					<a id="report" class="mui-control-item" href="#item3">鉴定结论</a>
+					<a id="sitePic" class="mui-control-item" href="#item3">现场图</a>
+				</div>
+			</div>
+		</header>
+
+		<div class="mui-collapse-content top-55">
+			<form class="mui-input-group">
+				<div class="bg-white">
+					<div class="mui-input-row">
+						<label>编&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号*</label>
+						<input type="text" class="mui-input-clear" placeholder="请输入文本...." id="number">
+					</div>
+					<div class="mui-input-row">
+						<label>房屋名称*</label>
+						<input type="text" class="mui-input-clear" placeholder="请输入文本...." id="build_name">
+					</div>
+					<div class="mui-input-row">
+						<label>坐落地点*</label>
+						<input type="text" class="mui-input-clear" placeholder="请输入文本...." id="build_place">
+					</div>
+					<div class="mui-input-row">
+						<label>建造年代*</label>
+						<input type="text" class="mui-input-clear" placeholder="请输入文本...." id="build_year">
+					</div>
+					<div class="mui-input-row">
+						<label>建筑面积(㎡)*</label>
+						<input type="text" class="mui-input-clear" placeholder="请输入数字..." id="build_area">
+					</div>
+					<div class="mui-input-row">
+						<label>建筑层数(地上)*</label>
+						<div class="mui-numbox" data-numbox-min='0' data-numbox-max='99' style="margin-top: 13px;">
+							<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+							<input class="mui-input-numbox" type="number" id="on_floor" value="0" />
+							<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+						</div>
+
+						<!--<label>建筑层数(地上)</label>
+					<input type="text" class="mui-input-clear" placeholder="请输入建筑层数..." id="on_floor">-->
+					</div>
+					<div class="mui-input-row">
+						<label>建筑层数(地下)*</label>
+
+						<div class="mui-numbox" data-numbox-min='0' data-numbox-max='10' style="margin-top: 13px;">
+							<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+							<input class="mui-input-numbox" type="number" id="underground" value="0" />
+							<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+						</div>
+						<!--<input type="text" class="mui-input-clear" placeholder="请输入建筑层数..." id="underground">-->
+					</div>
+					<!--<div class="mui-input-row">
+					<label>各层层高</label>
+					<input type="text" class="mui-input-clear" placeholder="请输入各层层高..." id="floor_height">
+				</div>-->
+				
+				</div>
+
+				<!--<h5 class="mui-content-padded">查勘研判*</h5>
+				<div class="mui-card  padding-10">
+					<div class="mui-table-view">
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50">
+								<input name="ckyp" type="radio" value="1">存在系统性危险
+							</span>
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50">
+								<input name="ckyp" type="radio" value="2">不存在系统性危险
+							</span>
+
+					</div>
+				</div>-->
+
+
+				<h5 class="mui-content-padded">使用功能*</h5>
+				<div class="mui-card  padding-10">
+					<div class="mui-table-view">
+
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50" style="top: 17px">
+								<input name="feature" type="radio" value="1">居住
+							</span>
+						<span class="mui-col-xs-6 mui-col-sm-6 mui-block mui-pull-left mui-radio mui-left left-50">
+								<input name="feature" type="radio" value="2"  style="top: 14px"> <span class="pull-left">其他</span>
+						<input type="text" class="mui-input-clear other" placeholder="请输入文本...." id="feature">
+						</span>
+
+					</div>
+				</div>
+
+				<h5 class="mui-content-padded">结构形式*</h5>
+				<div class="mui-card  padding-10">
+					<div class="mui-table-view">
+
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50">
+								<input name="style" type="radio" value="1">砖混
+							</span>
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50">
+								<input name="style" type="radio" value="2">砖混底框
+							</span>
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50">
+								<input name="style" type="radio" value="3">砖木
+							</span>
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50">
+								<input name="style" type="radio" value="4">木结构
+							</span>
+						<div class="mui-clearfix"></div>
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50 top-15 top-35">
+								<input name="style" type="radio" value="5">混凝土框架
+							</span>
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50 top-15 top-35">
+								<input name="style" type="radio" value="6">混凝土剪力墙
+							</span>
+						<span class="mui-col-xs-6 mui-col-sm-6 mui-block mui-pull-left mui-radio mui-left left-50 top-15">
+								<input name="style" type="radio" value="7" style="top: 16px;"> <span class="pull-left">其他</span>
+						<input type="text" class="mui-input-clear other" placeholder="请输入文本...." id="style">
+						</span>
+
+					</div>
+				</div>
+				
+				
+			
+				
+				<h5 class="mui-content-padded">产权类别*</h5>
+				<div class="mui-card  padding-10">
+					<div class="mui-table-view">
+
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50">
+								<input name="property_category" type="radio" value="1">公产
+							</span>
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50">
+								<input name="property_category" type="radio" value="2">私产
+							</span>
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50">
+								<input name="property_category" type="radio" value="3">企产
+							</span>
+						<!--<span class="mui-col-xs-6 mui-col-sm-6 mui-block mui-pull-left mui-radio mui-left left-50 top-15">
+								<input name="property_category" type="radio" value="4" property_category="top: 16px;"> <span class="pull-left">其他</span>
+						<input type="text" class="mui-input-clear other" placeholder="请输入文本...." id="style">-->
+						<span class="mui-col-xs-6 mui-col-sm-6 mui-block mui-pull-left mui-radio mui-left left-50">
+								<input name="property_category" type="radio" value="4"  style="top: 14px"> <span class="pull-left">其他</span>
+						<input type="text" class="mui-input-clear other" placeholder="请输入文本...." id="property_category">
+						</span>
+					</div>
+				</div>
+				
+				<!--<h5 class="mui-content-padded">产权类别*</h5>
+				<div class="mui-card  padding-10">
+					<div class="mui-table-view">
+
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-checkbox mui-left left-50">
+								<input name="property_category" type="radio" value="1">公产
+							</span>
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-checkbox mui-left left-50">
+								<input name="property_category" type="radio" value="2">私产
+							</span>
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-checkbox mui-left left-50">
+								<input name="property_category" type="radio" value="3">企产
+							</span>
+						<span class="mui-col-xs-6 mui-col-sm-6 mui-block mui-pull-left mui-checkbox mui-left left-50">
+								<input name="property_category" type="radio" value="4" class=" top-20">其他	
+								<input type="text" class="mui-input-clear other" placeholder="请输入文本..." id="property_category">	
+							</span>
+					</div>
+				</div>-->
+
+				<h5 class="mui-content-padded">图纸资料</h5>
+				<div class="mui-card bottom-60 padding-10">
+					<div class="mui-table-view">
+
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left  mui-left left-50 mui-checkbox">
+								<input name="drawings" type="checkbox" value="1">建筑图
+							</span>
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left  mui-left left-50 mui-checkbox">
+								<input name="drawings" type="checkbox" value="2">结构图
+							</span>
+					</div>
+				</div>
+
+				<!--btn-->
+				<div class="btn-bottom">
+					<div class="mui-col-xs-12 mui-col-sm-12 mui-pull-left" style="padding-right: 5px;">
+						<button id="next" type="button" data-loading-icon="mui-spinner mui-spinner-custom" class="mui-btn btn-darkBlue width-100p">下一步</button>
+					</div>
+
+				</div>
+			</form>
+		</div>
+
+		<script src="../conf/ipconf.js"></script>
+		<script type="text/javascript" src="../conf/command.js"></script>
+		<script src="../js/mui.enterfocus.js"></script>
+		<script src="../js/app.js"></script>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../conf/validator.js"></script>
+		<script type="text/javascript" src="../conf/inputTools.js"></script>
+		<script type="text/javascript">
+			var userId = localStorage.getItem("userId");
+
+			mui.plusReady(function() {
+
+				//判断是否登录
+				if(userId == null) {
+					window.location.href = "login.html";
+					return;
+				}
+				var editId = localStorage.getItem("editId");
+				if(editId != null) {
+					initNavigationEdit();
+					toEdit(editId);
+					//path用于接受trigger的参数
+					$("#next").click(function(event, path) {
+						doEdit(editId, path);
+					});
+				} else {
+					initNavigationAdd();
+					$("#next").click(function() {
+						doAdd();
+					});
+				}
+				//初始化表单元素
+				initInputType();
+				//添加数字验证
+				validator.isNum(["build_area"]);
+			});
+			/*function getPremaryKey(){
+				var priKey=1;
+				if(localStorage.getItem("priKey")!=null){
+					priKey=eval(localStorage.getItem("priKey"))+1;
+					//alert(priKey);
+				}
+				localStorage.setItem("priKey",priKey);
+				return priKey;
+			}*/
+			function toEdit(editId) {
+				var url = ip + "/item.do?command=getById";
+				var args = {};
+				args["id"] = editId;
+				plus.nativeUI.showWaiting("加载中...");
+				mui.ajax(url, {
+					data: args,
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+					var item = data.success;
+					$("#number").val(item.number);
+					$("#build_name").val(item.build_name);
+					$("#build_place").val(item.build_place);
+					$("#build_year").val(item.build_year);
+					$("#build_area").val(item.build_area);
+					$("#underground").val(item.underground);
+					$("#on_floor").val(item.on_floor);
+					inputTools.echoValue("radio", 2, "feature", item.feature, 2);
+					inputTools.echoValue("radio", 2, "style", item.style, 7);
+					inputTools.echoValue("radio", 2, "property_category", item.property_category, 4);
+					inputTools.echoValue("checkbox", 1, "drawings", item.drawings, 2);
+						plus.nativeUI.closeWaiting();
+					},
+					error: function(xhr, type, errorThrown) {
+						plus.nativeUI.closeWaiting();
+						mui.alert("网络异常,请稍后重试");
+					}
+				});
+			}
+			
+			
+			/*function getItem(id){
+				var items=eval("["+localStorage.getItem("items")+"]");
+				for(i in items){
+					if(items[i].id==id){
+						return items[i];
+					}
+				}
+			}*/
+			/*function delItem(id){
+				var items=eval("["+localStorage.getItem("items")+"]");
+				items.splice()
+			}*/
+			function doEdit(editId, path) {
+				var url = ip + "/item.do?command=doEdit";
+				var args = getValues();
+				if(args==null){
+					return;
+				}
+				args["editId"] = editId;
+				plus.nativeUI.showWaiting("加载中...");
+				mui.ajax(url, {
+					data: args,
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						var success = data.success;
+					if(path != null) {
+						if(data.success == 1) {
+							mui.alert('修改成功', '提示');
+							window.location.href = path;
+						} else {
+							mui.alert('修改失败', '提示');
+						}
+					} else {
+						if(data.success == 1) {
+							mui.alert('修改成功', '提示');
+							window.location.href = "drawing.html";
+						} else {
+							mui.alert('修改失败', '提示');
+						}
+					}
+						
+						
+						plus.nativeUI.closeWaiting();
+					},
+					error: function(xhr, type, errorThrown) {
+						plus.nativeUI.closeWaiting();
+						mui.alert("网络异常,请稍后重试");
+					}
+				});
+			}
+			
+			
+			/*function getItems(){
+				var items=localStorage.getItem("items");
+				if(items==null){
+					return "";
+				}else{
+					return items;
+				}
+			}*/
+			function doAdd() {
+				var url = ip + "/item.do?command=doAdd";
+				var args = getValues();
+				if(args==null){
+					return;
+				}
+				args["userId"] = userId;
+				plus.nativeUI.showWaiting("加载中...");
+				mui.ajax(url, {
+					data: args,
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						var id = data.success;
+					if(id != -1) {
+						localStorage.setItem("itemId", id);
+						window.location.href = "drawing.html";
+						mui.alert('保存成功', '提示');
+					} else {
+						mui.alert('保存失败,请重试', '提示');
+					}
+						plus.nativeUI.closeWaiting();
+					},
+					error: function(xhr, type, errorThrown) {
+						plus.nativeUI.closeWaiting();
+						mui.alert("网络异常,请稍后重试");
+					}
+				});
+			}
+			
+			
+
+			function getValues() {
+				if($.trim($("#build_name").val()) == "") {
+					mui.alert('建筑名称不得为空', '提示');
+					return;
+				}
+				
+				var json = {};
+				json["number"] = $("#number").val();
+				json["build_name"] = $("#build_name").val();
+				json["build_place"] = $("#build_place").val();
+				json["build_year"] = $("#build_year").val();
+				json["build_area"] = $("#build_area").val();
+				json["underground"] = $("#underground").val();
+				json["on_floor"] = $("#on_floor").val();
+				json["feature"] = inputTools.getInputValue("radio", 2, "feature", 2);
+				json["style"] = inputTools.getInputValue("radio", 2, "style", 7);
+				json["property_category"] = inputTools.getInputValue("radio", 2, "property_category", 4);
+				var drawings= inputTools.getInputValue("checkbox", 1, "drawings", 2);
+				if(drawings==""){
+					mui.alert("图纸资料为空","提示");
+				}
+				json["drawings"]=drawings;
+				return json;
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,448 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style_index_theme.css" rel="stylesheet" />
+		<script src="../js/mui.min.js"></script>
+		<script>
+			/*mui.init({
+																																																										swipeBack: true //启用右滑关闭功能
+																																																										gestureConfig: {
+																																																											tap: true, //默认为true
+																																																											doubletap: true, //默认为false
+																																																											longtap: true, //默认为false
+																																																											swipe: true, //默认为true
+																																																											drag: true, //默认为true
+																																																											hold: false, //默认为false，不监听
+																																																											release: false
+																																																										}
+
+																																																									});*/
+			mui.init({
+				gestureConfig: {
+
+					tap: true, //默认为true
+					doubletap: true, //默认为false
+
+				}
+			});
+
+			/*mui.plusReady(function(){
+				     var a =plus.webview.getWebviewById('in_index');
+				     
+				     if(a){
+				     	a.close();
+				     }  
+				});*/
+		</script>
+		<style type="text/css">
+			.mui-checkbox .checkbox01:before {
+				color: #e2dddd;
+				top: 0;
+				right: 0;
+			}
+			
+			.checkbox-center {
+				height: 30px;
+				top: 5px;
+				display: block;
+				border-top: 1px solid #e2dddd;
+			}
+			
+			.mui-checkbox .checkbox01 {
+				top: 3px !important;
+				right: 0 !important;
+				margin: 0 auto;
+				left: 0;
+				width: 100% !important;
+				text-align: center;
+			}
+			
+			.mui-grid-view.mui-grid-9 .mui-table-view-cell {
+				padding: 20px 15px;
+				border-right: 1px solid #e4e4e4;
+				border-bottom: 1px solid #e4e4e4;
+			}
+			
+			.film-icon {
+				width: 50px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div id="scroll" class="mui-scroll-wrapper" style="width: 100%;">
+			<div class="mui-scroll">
+
+				<!--	<ul class="mui-table-view mui-grid-view mui-grid-9" id="report_list">
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+		                    <span class="mui-icon mui-icon-compose"></span>
+		                    <div class="mui-media-body">南开区雅致里鉴定报告11111</div></a>
+		            <div class="mui-input-row mui-checkbox checkbox-center">
+		            	<input class="checkbox01" value="1" type="checkbox">
+		            </div></li>
+		           
+		            
+		        </ul>-->
+				<ul class="mui-table-view mui-grid-view mui-grid-9" id="report_list">
+
+				</ul>
+				<div class=" bottom-60"></div>
+			</div>
+
+			<div class="mui-clearfix mui-col-xs-12 mui-col-sm-12" style=" position: fixed;bottom:0px;line-height: 58px;border-top:1px solid #bfbfbf;display: block;background-color: #e4e4ea;z-index: 10;padding: 15px 0px;">
+
+				<div class="mui-input-row mui-checkbox mui-left mui-pull-left">
+					<label>全选</label>
+					<input id="checkAll" type="checkbox" style="top: 14px;">
+				</div>
+				<label class="mui-pull-left">已选 <span id="checkNum">0</span> 项</label>
+			</div>
+
+		</div>
+
+		<script type="text/javascript">
+			mui.init()
+			mui('#scroll').scroll();
+
+			mui('.mui-scroll-wrapper').scroll({
+				deceleration: 0.000005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+			});
+
+			/*var n = document.getElementById('new');			
+			n.addEventListener("tap",function () {
+			   mui.openWindow({
+				url:'basic_information.html',
+				styles:{
+			      top:'0px',//新页面顶部位置
+			    },
+				extras:{
+					name:'mui'  //扩展参数
+				}
+			});
+			});*/
+
+			var oldback = mui.back;
+			mui.back = function() {
+				//mui.currentWebview.hide();
+				oldback();
+			}
+		</script>
+		<script src="../js/mui.enterfocus.js"></script>
+		<script src="../js/app.js"></script>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script src="../conf/ipconf.js"></script>
+		<script src="../conf/command.js"></script>
+		<script type="text/javascript" src="../conf/mapJs.js"></script>
+		<script type="text/javascript" src="../conf/localDataUpdate.js"></script>
+		<script>
+			mui.plusReady(function() {
+				list();
+				$("#checkAll").change(function() {
+					var checkedAll = this.checked;
+					$(":checkbox[name='chk_item']").each(function() {
+						this.checked = checkedAll;
+						//更新已选多少项
+						$('#checkNum').text($("input:checkbox[id^='checkBox']:checked").length);
+					});
+				});
+
+			});
+
+			/*function list() {
+				var url = ip + "/item.do?command=findUnfinished";
+				var args = {};
+				args["userId"] = localStorage.getItem("userId");
+				args["time"] = new Date();
+				plus.nativeUI.showWaiting("请等待...");
+				mui.post(url, args, function(data) {
+					var list = data.success;
+					for(i in list) {
+						//var li = '<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" value="' + list[i].id + '"><a><span><img src="../img/abiword.png" alt="" class="film-icon"/></span><div class="mui-media-body">' + list[i].build_name + '</div></a><div class="mui-input-row mui-checkbox checkbox-center"><input id="checkBox'+list[i].id+'" class="checkbox01" value="'+list[i].id+'" type="checkbox"></div></li>';
+						var li = '<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" value="' + list[i].id + '"><span><img src="../img/abiword.png" alt="" class="film-icon"/></span><div class="mui-media-body">' + list[i].build_name + '</div><div class="mui-input-row mui-checkbox checkbox-center"><input id="checkBox' + list[i].id + '" value="' + list[i].id + '" name="chk_item" class="checkbox01"  type="checkbox"></div></li>';
+						var li = $(li);
+
+						li.on("doubletap", function() {
+							toEdit($(this).val());
+						});
+
+						li.unbind("click").click(function(e) {
+							var chk = document.getElementById("checkBox" + this.value);
+							if(chk.checked) {
+								chk.checked = false;
+							} else {
+								chk.checked = true;
+							}
+							$('#checkNum').text($("input:checkbox[id^='checkBox']:checked").length);
+						});
+						$("#report_list").append(li);
+					}
+					plus.nativeUI.closeWaiting();
+				}, 'json');
+			}*/
+
+			function list() {
+				plus.nativeUI.showWaiting("加载中...");
+				var url = ip + "/item.do?command=findUnfinished";
+				var args = {};
+				args["userId"] = localStorage.getItem("userId");
+				args["time"] = new Date();
+				mui.ajax(url, {
+					data: args,
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						var list = data.success;
+						for(i in list) {
+							//var li = '<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" value="' + list[i].id + '"><a><span><img src="../img/abiword.png" alt="" class="film-icon"/></span><div class="mui-media-body">' + list[i].build_name + '</div></a><div class="mui-input-row mui-checkbox checkbox-center"><input id="checkBox'+list[i].id+'" class="checkbox01" value="'+list[i].id+'" type="checkbox"></div></li>';
+							var li = '<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" value="' + list[i].id + '"><span><img src="../img/abiword.png" alt="" class="film-icon"/></span><div class="mui-media-body">' + list[i].build_name + '</div><div class="mui-input-row mui-checkbox checkbox-center"><input id="checkBox' + list[i].id + '" value="' + list[i].id + '" name="chk_item" class="checkbox01"  type="checkbox"></div></li>';
+							var li = $(li);
+
+							li.on("doubletap", function() {
+								toEdit($(this).val());
+							});
+
+							li.unbind("click").click(function(e) {
+								var chk = document.getElementById("checkBox" + this.value);
+								if(chk.checked) {
+									chk.checked = false;
+								} else {
+									chk.checked = true;
+								}
+								$('#checkNum').text($("input:checkbox[id^='checkBox']:checked").length);
+							});
+							$("#report_list").append(li);
+						}
+						plus.nativeUI.closeWaiting();
+					},
+					error: function(xhr, type, errorThrown) {
+						plus.nativeUI.closeWaiting();
+						mui.alert("网络异常,请稍后重试");
+					}
+				});
+			}
+
+			function toEdit(id) {
+				localStorage.removeItem("editId");
+				localStorage.removeItem("itemId");
+				localStorage.setItem("editId", id);
+				var fuyemian = plus.webview.getWebviewById(plus.runtime.appid);
+				fuyemian.evalJS("refresh('basic_information.html')");
+			}
+
+			function toUpdate(type) {
+
+				chk_value = [];
+				$('input[name="chk_item"]:checked').each(function() {
+					chk_value.push(this.value);
+				});
+				if(chk_value.length < 1) {
+					mui.alert('请至少选择一项', '提示');
+					return;
+				}
+				if(type == 1) {
+					var btnArray = ['否', '是'];
+					mui.confirm('是否确认删除选中对象？', '提示', btnArray, function(e) {
+						if(e.index == 1) {
+							doDel(chk_value.join());
+						} else {}
+					});
+				} else if(type == 2) {
+					/*if(chk_value.length!=1){
+						mui.alert('最多只能提交一项', '提示');
+					}else{
+						submit(chk_value);
+					}*/
+					var btnArray = ['否', '是'];
+					mui.confirm('是否确认提交选中对象？', '提示', btnArray, function(e) {
+						if(e.index == 1) {
+							//提交前验证本地是否存在平面图
+							submintByIds(1,chk_value);
+
+							//doBatchSubmit(chk_value);
+						}
+					});
+
+				}
+			}
+
+			function doBatchSubmit(ids) {
+				var url = ip + "/item.do?command=batchSubmit";
+				var args = {};
+				args["time"] = new Date();
+				args["itemIds"] = ids.join();
+				plus.nativeUI.showWaiting("加载中...");
+				mui.ajax(url, {
+					data: args,
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						var success = data.success;
+						if(success == "") {
+							mui.alert('提交成功', '提示');
+							location.href = "in_index_list.html";
+						} else {
+							var str = "填写不完整,以下报告存在问题:\n";
+							var enforcementIds = new Array();
+							for(i in success) {
+								str += success[i] + "\n";
+								enforcementIds.push(i);
+							}
+							str += '\n是否需要强制提交,报告数据并不完整!';
+							var btnArray = ['否', '是'];
+							mui.confirm(str, '提示', btnArray, function(e) {
+								if(e.index == 1) {
+									enforcementBatchSubmit(enforcementIds);
+								} else {
+									location.href = "in_index_list.html";
+								}
+							});
+						}
+						plus.nativeUI.closeWaiting();
+					},
+					error: function(xhr, type, errorThrown) {
+						plus.nativeUI.closeWaiting();
+						mui.alert("网络异常,请稍后重试");
+					}
+				});
+
+			}
+
+			/*function doBatchSubmit(ids) {
+				var url = ip + "/item.do?command=batchSubmit";
+				var args = {};
+				args["time"] = new Date();
+				args["itemIds"] = ids.join();
+				plus.nativeUI.showWaiting("请等待...");
+				mui.post(url, args, function(data) {
+					var success = data.success;
+					if(success == "") {
+						mui.alert('提交成功', '提示');
+						location.href = "in_index_list.html";
+					} else {
+						var str = "填写不完整,以下报告存在问题:\n";
+						var enforcementIds = new Array();
+						for(i in success) {
+							str += success[i] + "\n";
+							enforcementIds.push(i);
+						}
+						str += '\n是否需要强制提交,报告数据并不完整!';
+						var btnArray = ['否', '是'];
+						mui.confirm(str, '提示', btnArray, function(e) {
+							if(e.index == 1) {
+								enforcementBatchSubmit(enforcementIds);
+							} else {
+								location.href = "in_index_list.html";
+							}
+						});
+					}
+					plus.nativeUI.closeWaiting();
+				}, 'json');
+			}*/
+
+			/*function doDel(idStr) {
+				var url = ip + "/item.do?command=doDelete";
+				var args = {};
+				args["idStr"] = idStr;
+				args["time"] = new Date();
+				plus.nativeUI.showWaiting("请等待...");
+				mui.post(url, args, function(data) {
+					var success = eval("(" + data + ")").success;
+					if(success == 1) {
+						mui.alert('删除成功', '提示');
+						var fuyemian = plus.webview.getWebviewById(plus.runtime.appid);
+						location.href = "in_index_list.html";
+					} else {
+						mui.alert('删除失败,请重试', '提示');
+					}
+					plus.nativeUI.closeWaiting();
+				});
+
+			}*/
+
+			function doDel(idStr) {
+				var url = ip + "/item.do?command=doDelete";
+				var args = {};
+				args["idStr"] = idStr;
+				args["time"] = new Date();
+				plus.nativeUI.showWaiting("加载中...");
+				mui.ajax(url, {
+					data: args,
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						var success = data.success;
+						if(success == 1) {
+							mui.alert('删除成功', '提示');
+							var fuyemian = plus.webview.getWebviewById(plus.runtime.appid);
+							location.href = "in_index_list.html";
+						} else {
+							mui.alert('删除失败,请重试', '提示');
+						}
+						plus.nativeUI.closeWaiting();
+					},
+					error: function(xhr, type, errorThrown) {
+						plus.nativeUI.closeWaiting();
+						mui.alert("网络异常,请稍后重试");
+					}
+				});
+			}
+
+			/*		function enforcementBatchSubmit(ids) {
+						var url = ip + "/item.do?command=enforcementBatchSubmit";
+						var args = {};
+						args["time"] = new Date();
+						args["itemIds"] = ids.join();
+						plus.nativeUI.showWaiting("请等待...");
+						mui.post(url, args, function(data) {
+							var success = data.success;
+							if(success == 1) {
+								mui.alert('提交成功', '提示');
+								location.href = "in_index_list.html";
+							} else {
+								mui.alert('提交失败,请重试', '提示');
+							}
+							plus.nativeUI.closeWaiting();
+						}, 'json');
+					}
+					*/
+
+			function enforcementBatchSubmit(ids) {
+				var url = ip + "/item.do?command=enforcementBatchSubmit";
+				var args = {};
+				args["time"] = new Date();
+				args["itemIds"] = ids.join();
+				plus.nativeUI.showWaiting("加载中...");
+				mui.ajax(url, {
+					data: args,
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						var success = data.success;
+						if(success == 1) {
+							mui.alert('提交成功', '提示');
+							location.href = "in_index_list.html";
+						} else {
+							mui.alert('提交失败,请重试', '提示');
+						}
+						plus.nativeUI.closeWaiting();
+					},
+					error: function(xhr, type, errorThrown) {
+						plus.nativeUI.closeWaiting();
+						mui.alert("网络异常,请稍后重试");
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

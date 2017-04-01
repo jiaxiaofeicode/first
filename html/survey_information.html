@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link href="../css/style_index_theme.css" rel="stylesheet" />
+		<!--App自定义的css-->
+		<link rel="stylesheet" type="text/css" href="../css/app.css" />
+		<style type="text/css">
+			.mui-input-group {
+				background-color: rgba(255, 255, 255, 0);
+			}
+			
+			.bg-white {
+				background-color: #fff;
+				margin: 10px;
+				box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+				border-radius: 2px;
+			}
+			
+			.mui-input-group {
+				padding-top: 5px;
+			}
+			
+			.right-70 {
+				padding-right: 70px;
+			}
+			
+			.mui-table-view-cell:after {
+				background-color: rgba(255, 255, 255, 0);
+			}
+			
+			h5 {
+				font-weight: normal;
+				border-left: 3px solid #0062CC;
+				padding-left: 5px;
+				font-size: 16px;
+			}
+			
+			.h5 {
+				border-left: none;
+				padding-left: 0px;
+			}
+			
+			.mui-checkbox input[type=checkbox],
+			.mui-radio input[type=radio] {
+				top: -4px
+			}
+		</style>
+		<script src="../js/mui.min.js"></script>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav padding-bottom-10 mui-clearfix mui-block bg-darkBlue ">
+			<a class="mui-icon mui-icon-closeempty mui-pull-left color-white" href="index_Report.html"></a>
+			<div class="width-40p center-block mui-clearfix">
+				<div id="segmentedControl" class="mui-segmented-control">
+					<a id="basic" class="mui-control-item href="#item1">房屋概况</a>
+					<a id="drawing" class="mui-control-item " href="#item2">平面图</a>
+					<a id="info" class="mui-control-item mui-active" href="#item3">查勘信息</a>
+					<a id="report" class="mui-control-item" href="#item4">鉴定结论</a>
+					<a id="sitePic" class="mui-control-item" href="#item5">现场图</a>
+				</div>
+			</div>
+		</header>
+
+		<div class="mui-collapse-content top-20">
+			<form class="mui-input-group">
+				<h4 class="mui-content-padded top-55">建筑基本情况</h4>
+					<div class="mui-card padding-10">
+						<div class="mui-table-view mui-col-xs-12 mui-col-sm-12">
+							<span class="left-15">房屋名称：</span><span id="build_name"></span>
+						</div>
+					</div>
+				
+				<div class="mui-card padding-10">
+					<div class="mui-table-view">
+						<h5 class="mui-pull-left bottom-15 left-15">平面形式：*</div>
+						<div class="mui-clearfix"></div>
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50 top-20">
+							<input name="plate_form" type="radio" value="1">矩形
+						</span>
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50 top-20">
+							<input name="plate_form" type="radio" value="2">L形
+						</span>
+						<span class="mui-col-xs-6 mui-col-sm-6 mui-block mui-pull-left mui-radio mui-left left-50">
+							<input name="plate_form" type="radio" value="3" class="top-20"> <span class="pull-left">其他</span>
+							<input type="text" class="mui-input-clear other" placeholder="请备注..." id="plate_form">
+						</span>
+				</div>
+				
+				<div class="mui-card padding-10">
+					<div class="mui-table-view">
+						<h5 class="mui-pull-left bottom-15 left-15">屋面形式：*</div>
+						<div class="mui-clearfix"></div>
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50">
+							<input name="wmxs" type="radio" value="1">平面屋
+						</span>
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50">
+							<input name="wmxs" type="radio" value="2">坡面屋
+						</span>
+				</div>
+				
+				<div class="mui-card padding-10">
+					<div class="mui-table-view">
+						<h5 class="mui-pull-left bottom-15 left-15">建筑朝向：*</div>
+						<div class="mui-clearfix"></div>
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50 top-20">
+							<input name="jzcx" type="radio" value="1">南北
+						</span>
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50 top-20">
+							<input name="jzcx" type="radio" value="2">东西
+						</span>
+						<span class="mui-col-xs-6 mui-col-sm-6 mui-block mui-pull-left mui-radio mui-left left-50">
+							<input name="jzcx" type="radio" value="3" class="top-20"> <span class="pull-left">其他</span>
+							<input type="text" class="mui-input-clear other" placeholder="请备注..." id="jzcx">
+						</span>
+				</div>
+				<div class="bg-white">
+					<div class="mui-input-row">
+						<label>室内外高差(m)*</label>
+						<input type="text" class="mui-input-clear" placeholder="请输入数字..." id="snwgc">
+					</div>
+				</div>
+				
+				<div class="mui-card padding-10" style="padding-bottom: 0;">
+					<div class="mui-table-view">
+						<h5 class="mui-pull-left bottom-15 left-15">各层净高：</div>
+						<div class="mui-clearfix"></div>
+						<div id="on_floor_m"></div>
+						<div id="underground_m"></div>
+				</div>
+				
+				<div class="mui-card padding-10" style="padding-bottom: 0;">
+					<div class="mui-table-view">
+						<h5 class="mui-pull-left bottom-15 left-15">地基：</div>
+						<div class="mui-clearfix"></div>
+						<div class="mui-input-row">
+							<label style="width: 170px;">地基处理</label>
+							<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50 top-20">
+								<input name="djcl" type="radio" value="1">不详
+							</span>
+							<span class="mui-col-xs-6	 mui-col-sm-6 mui-block mui-pull-left mui-radio mui-left left-50">
+								<input name="djcl" type="radio" value="2" class="top-20"> <span class="pull-left">其他</span>
+								<input type="text" class="mui-input-clear other" placeholder="请输入文本..." id="djcl">
+							</span>
+						</div>	
+				</div>
+				
+				<div class="mui-card padding-10" style="padding-bottom: 0;">
+					<div class="mui-table-view">
+						<h5 class="mui-pull-left bottom-15 left-15">基础：</div>
+						<div class="mui-clearfix"></div>
+						<div class="mui-input-row">
+							<label style="width: 170px;">基础形式</label>
+							<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50 top-20">
+								<input name="jcxs" type="radio" value="1">不详
+							</span>
+							<span class="mui-col-xs-6	 mui-col-sm-6 mui-block mui-pull-left mui-radio mui-left left-50">
+								<input name="jcxs" type="radio" value="2" class="top-20"> <span class="pull-left">其他</span>
+								<input type="text" class="mui-input-clear other" placeholder="请输入文本..." id="jcxs">
+							</span>
+						</div>	
+						<div class="mui-input-row">
+							<label style="width: 170px;">基础深度</label>
+							<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50 top-20">
+								<input name="jcsd" type="radio" value="1">不详
+							</span>
+							<span class="mui-col-xs-6	 mui-col-sm-6 mui-block mui-pull-left mui-radio mui-left left-50">
+								<input name="jcsd" type="radio" value="2" class="top-20"> <span class="pull-left">其他</span>
+								<input type="text" class="mui-input-clear other" placeholder="请输入文本..." id="jcsd">
+							</span>
+						</div>	
+				</div>
+				
+				<h4 class="mui-content-padded">上部结构</h4>
+			
+				<div class="mui-card padding-10">
+					<div class="mui-table-view">
+						<h5 class="mui-pull-left bottom-15 left-15">竖向承重构件：*</div>
+						<div class="mui-clearfix"></div>
+						<span class="mui-col-xs-6 mui-col-sm-6 mui-block mui-pull-left mui-checkbox mui-left left-50">
+							<input name="sxczgj" type="checkbox" value="1" class="top-20">砖墙　内墙厚(mm)：
+							<input type="text" class="mui-input-clear other" placeholder="请输入数字..." id="sxczgj1_1"><br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;外墙厚(mm)：<input type="text" class="mui-input-clear other" placeholder="请输入数字..." id="sxczgj1_2">
+						</span>
+						<span class="mui-col-xs-6 mui-col-sm-6 mui-block mui-pull-left mui-checkbox mui-left left-50">
+							<input name="sxczgj" type="checkbox" value="2" class="top-20">混凝土柱　截面尺寸(mm)：
+							<input type="text" class="mui-input-clear other" placeholder="请输入数字..." id="sxczgj2">	
+						</span>
+						<span class="mui-col-xs-6 mui-col-sm-6 mui-block mui-pull-left mui-checkbox mui-left left-50  top-15">
+							<input name="sxczgj" type="checkbox" value="3" class="top-20">混凝土剪力墙　墙厚(mm)：
+							<input type="text" class="mui-input-clear other" placeholder="请输入数字..." id="sxczgj3">	
+						</span>
+						<span class="mui-col-xs-6 mui-col-sm-6 mui-block mui-pull-left mui-checkbox mui-left left-50 top-15">
+							<input name="sxczgj" type="checkbox" value="4" class="top-20">木柱　截面尺寸(mm)：
+							<input type="text" class="mui-input-clear other" placeholder="请输入数字..." id="sxczgj4">	
+						</span>
+						<span class="mui-col-xs-6 mui-col-sm-6 mui-block mui-pull-left mui-checkbox mui-left left-50 top-15">
+							<input name="sxczgj" type="checkbox" value="5" class="top-20">其他：
+							<input type="text" class="mui-input-clear other" placeholder="请输入数字..." id="sxczgj5">	
+						</span>
+					</div>
+				
+				<div class="mui-card padding-10">
+					<div class="mui-table-view">
+						<h5 class="mui-pull-left bottom-15 left-15">水平承重构件：*</div>
+						<div class="mui-clearfix"></div>
+						<span class="pull-left left-20" style="margin-top: 15px;display: block;">
+							梁：
+						</span>
+						<div  style="padding-left: 50px;margin-top: -36px;" >
+							<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-checkbox mui-left left-50 top-20">
+								<input name="bridge" type="checkbox" value="1">混凝土梁	
+							</span>
+							<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-checkbox mui-left left-50 top-20">
+								<input name="bridge" type="checkbox" value="2">木梁	
+							</span>
+							<span class="mui-col-xs-6 mui-col-sm-6 mui-block mui-pull-left mui-checkbox mui-left left-50">
+								<input name="bridge" type="checkbox" value="3" class=" top-20">其他	
+								<input type="text" class="mui-input-clear other" placeholder="请输入文本..." id="bridge">	
+							</span>							
+						</div>
+
+						
+						<div class="mui-clearfix">	</div>
+						<span class="pull-left left-20" style="margin-top: 15px;display: block;">
+							板：
+						</span>
+						<div  style="padding-left: 50px;margin-top: -35px;" >
+							<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-checkbox mui-left left-50 top-15">
+								<input name="board" type="checkbox" value="1">混凝土预制板
+							</span>
+							<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-checkbox mui-left left-50 top-15">
+								<input name="board" type="checkbox" value="2">混凝土现浇板	
+							</span>
+							<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-checkbox mui-left left-50 top-15">
+								<input name="board" type="checkbox" value="3">密肋空心砖	
+							</span>
+							<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-checkbox mui-left left-50 top-15">
+								<input name="board" type="checkbox" value="4">木楼板	
+							</span>
+							<span class="mui-col-xs-6 mui-col-sm-6 mui-block mui-pull-left mui-checkbox mui-left left-50 top-15">
+								<input name="board" type="checkbox" value="5" class="top-20">其他	
+								<input type="text" class="mui-input-clear other" placeholder="请输入文本..." id="board">	
+							</span>							
+						</div>
+
+						<div class="mui-clearfix"></div>
+						<span class="pull-left left-20" style="margin-top: 15px;display: block;">
+							屋架：
+						</span>
+						<div  style="padding-left: 50px;margin-top: -35px;" >
+							<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-checkbox mui-left left-50 top-15">
+								<input name="wj" type="checkbox" value="1">木屋架	
+							</span>
+							<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-checkbox mui-left left-50 top-15">
+								<input name="wj" type="checkbox" value="2">混凝土屋架	
+							</span>
+							<span class="mui-col-xs-6 mui-col-sm-6 mui-block mui-pull-left mui-checkbox mui-left left-50 top-15">
+								<input name="wj" type="checkbox" value="3">钢屋架	
+							</span>
+							<span class="mui-col-xs-12 mui-col-sm-12 mui-block mui-pull-left mui-checkbox mui-left left-50 top-15">
+								<input name="wj" type="checkbox" value="4" class="top-20">其他	
+								<input type="text" class="mui-input-clear other" placeholder="请输入文本..." id="wj">	
+							</span>							
+						</div>
+
+					</div>
+				
+				<div class="mui-card padding-10" style="padding-bottom: 0;">
+					<div class="mui-table-view">
+						<h5 class="mui-pull-left bottom-15 left-15">使用情况：</div>
+						<div class="mui-clearfix"></div>
+						<div class="mui-input-row">
+							<label style="width: 170px;">用途变更</label>
+							<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50 top-20">
+								<input name="ytbg" type="radio" value="1">不详
+							</span>
+							<span class="mui-col-xs-6	 mui-col-sm-6 mui-block mui-pull-left mui-radio mui-left left-50">
+								<input name="ytbg" type="radio" value="2" class="top-20"> <span class="pull-left">其他</span>
+								<input type="text" class="mui-input-clear other" placeholder="请输入文本..." id="ytbg">
+							</span>
+						</div>	
+						<div class="mui-input-row">
+							<label style="width: 170px;">改扩建</label>
+							<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50 top-20">
+								<input name="gkj" type="radio" value="1">不详
+							</span>
+							<span class="mui-col-xs-6	 mui-col-sm-6 mui-block mui-pull-left mui-radio mui-left left-50">
+								<input name="gkj" type="radio" value="2" class="top-20"> <span class="pull-left">其他</span>
+								<input type="text" class="mui-input-clear other" placeholder="请输入文本..." id="gkj">
+							</span>
+						</div>
+						<div class="mui-input-row">
+							<label style="width: 170px;">修缮加固</label>
+							<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50 top-20">
+								<input name="xsjg" type="radio" value="1">不详
+							</span>
+							<span class="mui-col-xs-6	 mui-col-sm-6 mui-block mui-pull-left mui-radio mui-left left-50">
+								<input name="xsjg" type="radio" value="2" class="top-20"> <span class="pull-left">其他</span>
+								<input type="text" class="mui-input-clear other" placeholder="请输入文本..." id="xsjg">
+							</span>
+						</div>	
+						<div class="mui-input-row">
+							<label style="width: 170px;">灾害</label>
+							<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50 top-20">
+								<input name="zh" type="radio" value="1">不详
+							</span>
+							<span class="mui-col-xs-6	 mui-col-sm-6 mui-block mui-pull-left mui-radio mui-left left-50">
+								<input name="zh" type="radio" value="2" class="top-20"> <span class="pull-left">其他</span>
+								<input type="text" class="mui-input-clear other" placeholder="请输入文本..." id="zh">
+							</span>
+						</div>
+						<div class="mui-input-row">
+							<label style="width: 170px;">拆改情况</label>
+							<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50 top-20">
+								<input name="cgqk" type="radio" value="1">不详
+							</span>
+							<span class="mui-col-xs-6	 mui-col-sm-6 mui-block mui-pull-left mui-radio mui-left left-50">
+								<input name="cgqk" type="radio" value="2" class="top-20"> <span class="pull-left">其他</span>
+								<input type="text" class="mui-input-clear other" placeholder="请输入文本..." id="cgqk">
+							</span>
+						</div>	
+						<div class="mui-input-row">
+							<label style="width: 170px;">超载情况</label>
+							<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50 top-20">
+								<input name="czqk" type="radio" value="1">不详
+							</span>
+							<span class="mui-col-xs-6	 mui-col-sm-6 mui-block mui-pull-left mui-radio mui-left left-50">
+								<input name="czqk" type="radio" value="2" class="top-20"> <span class="pull-left">其他</span>
+								<input type="text" class="mui-input-clear other" placeholder="请输入文本..." id="czqk">
+							</span> 
+						</div>
+				</div>
+				
+				<h5 class="mui-content-padded">查勘研判*</h5>
+				<div class="mui-card  padding-10">
+					<div class="mui-table-view">
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50">
+								<input name="ckyp" type="radio" value="1">存在系统性危险
+							</span>
+						<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-radio mui-left left-50">
+								<input name="ckyp" type="radio" value="2">不存在系统性危险
+							</span>
+
+					</div>
+				</div>
+
+				<div class="mui-card padding-10">
+				<div class="mui-clearfix"></div>
+						<span class="pull-left left-20" style="margin-top: 15px;display: block;">
+							备注：
+						</span>
+						<div  style="padding-left: 50px;margin-top: -35px;" >
+							<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-checkbox mui-left left-50 top-15">
+								<input name="remark" type="checkbox" value="1">因条件所限，未能进入所有房间全数查勘
+							</span>
+							<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-checkbox mui-left left-50 top-15">
+								<input name="remark" type="checkbox" value="2">因条件所限，未能对隐蔽结构构件全数查勘
+							</span>
+							<span class="mui-col-xs-3 mui-col-sm-3 mui-block mui-pull-left mui-checkbox mui-left left-50 top-15">
+								<input name="remark" type="checkbox" value="3" class="top-20">其他	
+								<input type="text" class="mui-input-clear other" placeholder="请输入文本..." id="remark" style="width: 120px;">	
+							</span>							
+						</div>
+
+					</div>
+					</div>
+				
+		
+				
+				<div class=" bottom-60"></div>
+				<div class="btn-bottom" style="z-index: -1;">
+					<div class="mui-col-xs-12 mui-col-sm-12 mui-pull-left" style="padding-right: 5px;">
+						<button id="next" type="button" data-loading-icon="mui-spinner mui-spinner-custom" class="mui-btn btn-darkBlue width-100p">下一步</button>
+					</div>			
+				</div>
+			</form>
+		</div>
+				
+		
+		<script type="text/javascript" src="../conf/command.js"></script>
+		<script src="../conf/ipconf.js"></script>
+		<script src="../js/mui.enterfocus.js"></script>
+		<script src="../js/app.js"></script>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../conf/validator.js"></script>
+		<script src="../conf/inputTools.js"></script>
+		<script type="text/javascript" src="../conf/survey_info.js"></script>
+	</body>
+
+</html>

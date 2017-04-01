@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script src="../js/mui.min.js"></script>
+		<script>
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+
+			mui.plusReady(function() {
+				var a = plus.webview.getWebviewById('in_index');
+
+				if(a) {
+					a.close();
+				}
+			});
+		</script>
+		<style>
+			.left-bg {
+				height: 100%;
+				display: block;
+				background: url(../img/personal_bg.jpg) top center no-repeat;
+				background-size: cover;
+				position: absolute;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav padding-bottom-10 mui-clearfix mui-block bg-darkBlue">
+
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+			<h1 class="mui-title">设置</h1>
+			<div class="width-40p center-block mui-clearfix">
+
+			</div>
+		</header>
+		<div class="mui-col-sm-5 mui-col-xs-5 left-bg mui-pull-left">
+
+		</div>
+		<div class="mui-col-sm-7 mui-col-xs-7 mui-pull-right" style="margin-bottom: 35px;padding: 55px 20px;">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="change_password.html" class="mui-navigate-right">修改密码</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view top-20">
+				<li class="mui-table-view-cell">
+					<a class="mui-text-center" id="exit" href="#">
+						退出登录
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function() {
+				$("#exit").click(function(){
+					localStorage.removeItem("userId");
+					localStorage.removeItem("username");
+					localStorage.removeItem("password");
+					window.location.href="login.html";
+				});
+			});
+		</script>
+	
+	</body>
+
+</html>

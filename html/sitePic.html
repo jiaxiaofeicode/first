@@ -1,0 +1,600 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style_index_theme.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-preview-image.mui-fullscreen {
+				position: fixed;
+				z-index: 20;
+				background-color: #000;
+			}
+			
+			.mui-preview-header,
+			.mui-preview-footer {
+				position: absolute;
+				width: 100%;
+				left: 0;
+				z-index: 10;
+			}
+			
+			.mui-preview-header {
+				height: 44px;
+				top: 0;
+			}
+			
+			.mui-preview-footer {
+				height: 50px;
+				bottom: 0px;
+			}
+			
+			.mui-preview-header .mui-preview-indicator {
+				display: block;
+				line-height: 25px;
+				color: #fff;
+				text-align: center;
+				margin: 15px auto 4;
+				width: 70px;
+				background-color: rgba(0, 0, 0, 0.4);
+				border-radius: 12px;
+				font-size: 16px;
+			}
+			
+			.mui-preview-image {
+				display: none;
+				-webkit-animation-duration: 0.5s;
+				animation-duration: 0.5s;
+				-webkit-animation-fill-mode: both;
+				animation-fill-mode: both;
+			}
+			
+			.mui-preview-image.mui-preview-in {
+				-webkit-animation-name: fadeIn;
+				animation-name: fadeIn;
+			}
+			
+			.mui-preview-image.mui-preview-out {
+				background: none;
+				-webkit-animation-name: fadeOut;
+				animation-name: fadeOut;
+			}
+			
+			.mui-preview-image.mui-preview-out .mui-preview-header,
+			.mui-preview-image.mui-preview-out .mui-preview-footer {
+				display: none;
+			}
+			
+			.mui-zoom-scroller {
+				position: absolute;
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-box-align: center;
+				-webkit-align-items: center;
+				align-items: center;
+				-webkit-box-pack: center;
+				-webkit-justify-content: center;
+				justify-content: center;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				-webkit-backface-visibility: hidden;
+			}
+			
+			.mui-zoom {
+				-webkit-transform-style: preserve-3d;
+				transform-style: preserve-3d;
+			}
+			
+			.mui-slider .mui-slider-group .mui-slider-item img {
+				width: auto;
+				height: auto;
+				max-width: 100%;
+				max-height: 100%;
+			}
+			
+			.mui-android-4-1 .mui-slider .mui-slider-group .mui-slider-item img {
+				width: 100%;
+			}
+			
+			.mui-android-4-1 .mui-slider.mui-preview-image .mui-slider-group .mui-slider-item {
+				display: inline-table;
+			}
+			
+			.mui-android-4-1 .mui-slider.mui-preview-image .mui-zoom-scroller img {
+				display: table-cell;
+				vertical-align: middle;
+			}
+			
+			.mui-preview-loading {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				display: none;
+			}
+			
+			.mui-preview-loading.mui-active {
+				display: block;
+			}
+			
+			.mui-preview-loading .mui-spinner-white {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-left: -25px;
+				margin-top: -25px;
+				height: 50px;
+				width: 50px;
+			}
+			
+			.mui-preview-image img.mui-transitioning {
+				-webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
+				transition: transform 0.5s ease, opacity 0.5s ease;
+			}
+			
+			@-webkit-keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			
+			@keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			
+			@-webkit-keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			
+			@keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			
+			p img {
+				max-width: 100%;
+				height: auto;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav padding-bottom-10 mui-clearfix mui-block bg-darkBlue " style="z-index: 9999;">
+			<a id="shouye" class="mui-icon mui-icon-closeempty mui-pull-left color-white" href="#"></a>
+			<div class="width-40p center-block mui-clearfix">
+				<div id="segmentedControl" class="mui-segmented-control">
+					<a id="basic" class="mui-control-item" href="#item1">房屋概况</a>
+					<a id="drawing" class="mui-control-item " href="#item2">平面图</a>
+					<a id="info" class="mui-control-item" href="#item3">查勘信息</a>
+					<a id="report" class="mui-control-item" href="#item3">鉴定结论</a>
+					<a id="sitePic" class="mui-control-item mui-active" href="#item4">现场图</a>
+				</div>
+			</div>
+		</header>
+		<div class="content top-55 bottom-60">
+
+			<div class="mui-col-xs-2 mui-col-sm-2 mui-pull-left padding-1">
+				<a href="#" class="mui-block">
+					<div class="img-squre mui-icon mui-icon-plusempty" id="img-squre"></div>
+				</a>
+			</div>
+			<div id="mydiv">
+				<!--<div class="Thumbnails_item Thumbnails_bg1">
+								<img src="../images/1.jpg" class="Thumbnails_item spot_pic" data-preview-src="" data-preview-group="1"/>
+							</div>-->
+			</div>
+
+		</div>
+		<div class="btn-bottom">
+			<div class="mui-col-xs-6 mui-col-sm-6 mui-pull-left" style="padding-right: 5px;">
+				<button id="next" type="button" data-loading-icon="mui-spinner mui-spinner-custom" class="mui-btn btn-darkBlue width-100p">保存</button>
+			</div>
+			<div class="mui-col-xs-6 mui-col-sm-6 mui-pull-left" style="padding-left: 5px;">
+				<button id="submit" type="button" data-loading-icon="mui-spinner mui-spinner-custom" class="mui-btn btn-darkBlue width-100p">提交</button>
+			</div>
+		</div>
+
+	</body>
+
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/mui.zoom.js"></script>
+	<script src="../js/mui.previewimage.js"></script>
+	<script type="text/javascript">
+		mui.previewImage();
+		mui.init({
+			gestureConfig: {
+
+				tap: true, //默认为true
+				longtap: true, //默认为false
+
+			}
+		});
+		document.getElementById("img-squre").addEventListener('tap', function() {
+			var btnArray = [{
+				title: "拍照或录像"
+			}, {
+				title: "选取现有的"
+			}];
+			plus.nativeUI.actionSheet({
+				//title:"选择照片",
+				cancel: "取消",
+				buttons: btnArray
+			}, function(e) {
+				var index = e.index;
+				//var text = "你刚点击了\"";
+				switch(index) {
+					case 0:
+						//text += "取消";
+						break;
+					case 1:
+						//text += "拍照或录像";
+						getImage();
+						break;
+					case 2:
+						galleryImgsSelected();
+						//text += "选取现有的";
+						break;
+				}
+				//info.innerHTML = text + "\"按钮";
+			});
+		});
+	</script>
+
+	<script type="text/javascript" src="../conf/command.js"></script>
+	<script type="text/javascript" src="../js/immersed.js"></script>
+	<script type="text/javascript" src="../conf/ipconf.js"></script>
+	<script src="../js/mui.enterfocus.js"></script>
+	<script src="../js/app.js"></script>
+	<script src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../conf/mapJs.js"></script>
+	<script type="text/javascript" src="../conf/localDataUpdate.js"></script>
+	<script>
+		var uploadFlag = false;
+		var itemId = localStorage.getItem("itemId");
+		if(itemId == null) {
+			itemId = localStorage.getItem("editId");
+		}
+		var lfs = []; // 保留上次选择图片列表
+		mui.plusReady(function() {
+			if(location.href.indexOf("?xyz=") < 0) {
+				location.href = location.href + "?xyz=" + Math.random();
+			} else {
+				var editId = localStorage.getItem("editId");
+				if(editId != null) {
+					toEdit(editId);
+					initNavigationEdit();
+				} else {
+					initNavigationAdd();
+				}
+
+				$("#next").click(function(event, path) {
+					createUpload(lfs, 1, path);
+				});
+				$('#submit').click(function() {
+					createUpload(lfs, 2);
+				});
+				$('#shouye').click(function() {
+					location.href = "index_Report.html";
+				});
+				initInputType();
+			}
+
+		});
+
+		/*function toEdit(editId) {
+
+			var url = ip + "/item.do?command=getById";
+			var args = {};
+			args["id"] = editId;
+			plus.nativeUI.showWaiting("请等待...");
+			mui.post(url, args, function(data) {
+				var item = eval("(" + data + ")").success;
+				var spot_url = item.spot_img_url;
+				if(spot_url != "") {
+					updateLfs(spot_url.split(","), "add");
+					showImg();
+				}
+				plus.nativeUI.closeWaiting();
+			});
+		}*/
+
+		function toEdit(editId) {
+			var url = ip + "/item.do?command=getById";
+			var args = {};
+			args["id"] = editId;
+			plus.nativeUI.showWaiting("加载中...");
+			mui.ajax(url, {
+				data: args,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					var item = data.success;
+					var spot_url = item.spot_img_url;
+					if(spot_url != "") {
+						updateLfs(spot_url.split(","), "add");
+						showImg();
+					}
+					plus.nativeUI.closeWaiting();
+				},
+				error: function(xhr, type, errorThrown) {
+					plus.nativeUI.closeWaiting();
+					mui.alert("网络异常,请稍后重试");
+				}
+			});
+		}
+
+		function updateLfs(urlArr, methodName) {
+			if(methodName == "del") {
+				for(var i in lfs) {
+					if(lfs[i] == urlArr) {
+
+						lfs.splice(i, 1);
+					}
+				}
+			}
+			if(methodName == "add") {
+				for(var i in urlArr) {
+					lfs.push(urlArr[i]);
+				}
+			}
+		}
+
+		function showImg() {
+			$('#mydiv').empty();
+			for(var i in lfs) {
+				var div = '<div class="mui-col-xs-2 mui-col-sm-2 mui-pull-left padding-1" name="' + lfs[i] + '">' +
+					'<div style="float: left;" class="img-squre"><img src="' + lfs[i] + '" alt=""  data-preview-src="" data-preview-group="1" class="width-100p"/></div>' +
+					'</div>';
+				div = $(div);
+				div.on("longtap", function() {
+					var thisDiv = this;
+					var btnArray = ['否', '是'];
+					mui.confirm('是否确认删除选中对象？', '提示', btnArray, function(e) {
+						if(e.index == 1) {
+							updateLfs($(thisDiv).find('img')[0].src, "del");
+							thisDiv.remove();
+						}
+					});
+				});
+				$('#mydiv').append(div);
+
+			}
+		}
+
+		function getImage() {
+			var cmr = plus.camera.getCamera();
+			cmr.captureImage(function(path) {
+				plus.gallery.save(path);
+
+				//真实路径
+				plus.io.resolveLocalFileSystemURL(path, function(entry) {
+
+					path = "file://" + entry.fullPath;
+
+					updateLfs(new Array(path), "add");
+					showImg();
+					/*	console.log("真实路径：" + path);
+						$('#mydiv').append('<div class="mui-col-xs-2 mui-col-sm-2 mui-pull-left padding-1" name="img">' +
+							'<div style="float: left;" class="img-squre"><img src="' + path + '" alt=""  data-preview-src="" data-preview-group="1" class="width-100p"/></div>' +
+							'</div>');*/
+				}, function(e) {
+					alert(e.message);
+				});
+			}, function(e) {
+				//outSet("取消拍照");
+			}, {
+				filename: "_doc/gallery/",
+				index: 1
+			});
+		}
+
+		function galleryImgsSelected() {
+			// 从相册中选择图片
+			//outSet("从相册中选择多张图片(限定最多选择3张):");
+			plus.gallery.pick(function(e) {
+				updateLfs(e.files, "add");
+				showImg();
+				/*lfs = e.files;
+				for(var i in e.files) {
+					console.log(e.files[i])
+					$('#mydiv').append('<div class="mui-col-xs-2 mui-col-sm-2 mui-pull-left padding-1" name="img">' +
+						'<div style="float: left;" class="img-squre"><img src="' + e.files[i] + '" alt=""  data-preview-src="" data-preview-group="1" class="width-100p"/></div>' +
+						'</div>');*/
+
+			}, function(e) {
+				//outSet("取消选择图片");
+			}, {
+				filter: "image",
+				multiple: true,
+				//maximum: 3,
+				//selected: lfs,
+				system: false,
+				/*onmaxed: function() {
+					plus.nativeUI.alert('最多只能选择3张图片');
+				}*/
+			}); // 最多选择3张图片
+		}
+		/**
+		 * 1是保存 2是提交
+		 * @param {Object} filenames
+		 * @param {Object} type
+		 */
+		function createUpload(filenames, type, path) {
+			var serverFilenames = new Array();
+			for(var i = 0; i < filenames.length; i++) {
+				if(filenames[i].indexOf("http://") != -1) {
+					//若以http开头的元素则截取后加入专门用于存放服务器已经存在的图片的地址
+					serverFilenames.push(filenames.splice(i, 1));
+					i--;
+				}
+			}
+			console.log(serverFilenames.join());
+			console.log(filenames.join());
+			var url = ip + '/item.do?command=upload1';
+			plus.nativeUI.showWaiting("加载中...");
+			setTimeout('closeWaiting()', 10000);
+			var args = { method: "POST", blocksize: 204800, priority: 100, async: false };
+			var task = plus.uploader.createUpload(url, args, function(t, status) {
+				// 上传完成
+				if(status == 200) {
+					//mui.alert('保存成功', '提示');
+					if(type == 2) {
+						var arr=new Array();
+						arr.push(itemId);
+						
+						
+						//提交前验证本地是否存在平面图
+						submintByIds(2,arr);
+					} else {
+						if(path == null) {
+							location.href = "index_Report.html";
+						} else {
+							location.href = path;
+						}
+
+					}
+				} else {
+					mui.alert('保存失败,请重试', '提示');
+				}
+				plus.nativeUI.closeWaiting();
+			});
+			for(i in filenames) {
+				task.addFile(filenames[i], { key: i });
+			}
+			task.addData("itemId", itemId);
+			if(serverFilenames.length != 0) {
+				task.addData("serverFilenames", serverFilenames.join());
+			}
+			task.start();
+			return uploadFlag;
+		}
+
+		function submit() {
+			var url = ip + "/item.do?command=submit";
+			var args = {};
+			args["time"] = new Date();
+			args["itemId"] = itemId;
+			plus.nativeUI.showWaiting("加载中...");
+			mui.ajax(url, {
+				data: args,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					var success = data.success;
+					if(success == "") {
+						mui.alert('提交成功', '提示');
+						location.href = "success.html";
+					} else {
+						var btnArray = ['否', '是'];
+						mui.confirm("填写不完整,以下字段存在问题:\n" + success + '\n是否需要强制提交当前报告,当前报告数据并不完整!', '提示', btnArray, function(e) {
+							if(e.index == 1) {
+								enforcementSubmit(args);
+							}
+
+						});
+					}
+					plus.nativeUI.closeWaiting();
+				},
+				error: function(xhr, type, errorThrown) {
+					plus.nativeUI.closeWaiting();
+					mui.alert("网络异常,请稍后重试");
+				}
+			});
+
+		}
+
+		/*function submit() {
+			var url = ip + "/item.do?command=submit";
+			var args = {};
+			args["time"] = new Date();
+			args["itemId"] = itemId;
+			plus.nativeUI.showWaiting("请等待...");
+			mui.post(url, args, function(data) {
+				var success = data.success;
+				if(success == "") {
+					mui.alert('提交成功', '提示');
+					location.href = "success.html";
+				} else {
+					var btnArray = ['否', '是'];
+					mui.confirm("填写不完整,以下字段存在问题:\n" + success + '\n是否需要强制提交当前报告,当前报告数据并不完整!', '提示', btnArray, function(e) {
+						if(e.index == 1) {
+							enforcementSubmit(args);
+						}
+
+					});
+				}
+				plus.nativeUI.closeWaiting();
+			}, 'json');
+		}*/
+		function enforcementSubmit(args) {
+			var url = ip + "/item.do?command=enforcementSubmit";
+			plus.nativeUI.showWaiting("加载中...");
+			mui.ajax(url, {
+				data: args,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+
+					var success = data.success;
+					if(success == 1) {
+						mui.alert('提交成功', '提示');
+						location.href = "success.html";
+					} else {
+						mui.alert('提交失败,请重试', '提示');
+					}
+					plus.nativeUI.closeWaiting();
+				},
+				error: function(xhr, type, errorThrown) {
+					plus.nativeUI.closeWaiting();
+					mui.alert("网络异常,请稍后重试");
+				}
+			});
+		}
+
+		/*function enforcementSubmit(args) {
+			var url = ip + "/item.do?command=enforcementSubmit";
+			plus.nativeUI.showWaiting("请等待...");
+			mui.post(url, args, function(data) {
+				var success = eval("(" + data + ")").success;
+				if(success == 1) {
+					mui.alert('提交成功', '提示');
+					location.href = "success.html";
+				} else {
+					mui.alert('提交失败,请重试', '提示');
+				}
+				plus.nativeUI.closeWaiting();
+			});
+		}*/
+	</script>
+
+</html>

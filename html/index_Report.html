@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style_index_theme.css" rel="stylesheet" />
+		<script type="text/javascript" src="../js/mui.js"></script>
+		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				subpages: [{
+					url: 'in_index_list.html',
+					id: 'in_index',
+					styles: {
+						top: '55px', //mui标题栏默认高度为45px；
+						bottom: '0px', //默认为0px，可不定义；
+						width: '75%',
+					}
+				}]
+			});
+		</script>
+	</head>
+
+	<body>
+		<div class="mui-off-canvas-wrap mui-draggable mui-scalable">
+
+			<div class="mui-inner-wrap">
+				<!-- 主页面标题 -->
+				<header class="mui-bar mui-bar-nav padding-bottom-10 mui-clearfix mui-block bg-darkBlue">
+
+					<a id="pica" class="mui-icon mui-icon-contact mui-pull-left color-white"></a>
+
+					<!--<a id="icon-icon-contact"><span class="mui-icon mui-icon-contact"></span></a>-->
+					<div class="width-40p center-block mui-clearfix">
+						<div id="segmentedControl" class="mui-segmented-control">
+							<a class="mui-control-item mui-active" href="#">首页</a>
+							<a id="report" class="mui-control-item" href="report_search.html">报告</a>
+							<a class="mui-control-item" href="#">统计</a>
+						</div>
+					</div>
+				</header>
+				<div class="mui-content">
+					<div class="" style="height: 100%;">
+						<!-- 主界面具体展示内容 -->
+						<div class="content" style="margin-top: 10px;">
+
+						</div>
+						<div class="mui-pull-right mui-text-center" style="position: absolute;display: block;height: 100%;right: 0;background-color: #fff;width: 25%;">
+							<div class="center-middle-index-btn width-100p">
+								<a id="new" type="button" href="../html/basic_information.html" class="mui-btn mui-btn-primary mui-icon mui-icon-compose width-100p top-20 btn-index" style="color: #fff;">
+									新建
+								</a>
+								<a id="del" type="button" class="mui-btn mui-btn-danger mui-icon mui-icon-trash width-100p top-20 mui-btn-outlined btn-index">
+									刪除
+								</a>
+								<a id="submit" class="mui-btn mui-btn-success mui-icon mui-icon-upload width-100p top-20 mui-btn-outlined btn-index">
+									提交
+								</a>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<script>
+				var new_a = document.getElementById('new');
+				new_a.addEventListener("tap", function() {
+					localStorage.removeItem("editId");
+					localStorage.removeItem("itemId");
+					
+					window.location.href = "basic_information.html";
+				});
+
+				var new_p = document.getElementById('report');
+				new_p.addEventListener("tap", function() {
+
+					plus.webview.hide('in_index_list.html');
+					window.location.href = "report_search.html";
+
+				});
+				var pica = document.getElementById('pica');
+				pica.addEventListener("tap", function() {
+					window.location.href = "Personal.html";
+				});
+
+				mui('#scroll').scroll();
+
+				mui('.mui-scroll-wrapper').scroll({
+					deceleration: 0.000005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+				});
+
+				document.querySelector('.mui-off-canvas-wrap').addEventListener('shown', function(event) {
+					mui.plusReady(function() {
+						var a = plus.webview.getWebviewById('in_index');
+						if(a) {
+							a.hide();
+						}
+					});
+				})
+
+				document.querySelector('.mui-off-canvas-wrap').addEventListener('hidden', function(event) {
+
+					var a = plus.webview.getWebviewById('in_index');
+
+					a.show();
+				});
+
+				function refresh(relocation) {
+					window.location.href = relocation;
+				}
+			</script>
+			<script>
+				mui.plusReady(function() {
+					//恢复默认值1为表单元素可用,2为不可用
+					localStorage.setItem("inputType",1);
+					var del = document.getElementById('del');
+					del.addEventListener("tap", function() {
+						toDel();
+					});
+					var submit = document.getElementById('submit');
+					submit.addEventListener("tap", function() {
+						toSubmit();
+					});
+				});
+				function toDel(){
+					var a = plus.webview.getWebviewById('in_index');
+					a.evalJS("toUpdate(1)");
+				}
+				function toSubmit(){
+					var a = plus.webview.getWebviewById('in_index');
+					a.evalJS("toUpdate(2)");
+				}
+			</script>
+	</body>
+
+</html>
